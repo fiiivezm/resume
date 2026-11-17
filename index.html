@@ -1,0 +1,2249 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ 'sha256-I8bJqCabY2d9ndp0HH8+zO7CmGKPUAD/OzV9rf2Wx2A=' 'sha256-Ka6S419gasYspcS7nOdf/KWdJk4DU2wXkfF2H9DXAN8=' 'sha256-iuSy6/5g24dMRNmkJP/hHDaK40Suh+sPaPoXNZE+XAU='; style-src https://fonts.googleapis.com 'sha256-Jh8kZFuISGECykEFbQj/YrRSeV55J/swxk9O1wwUjpI=' 'sha256-+EGTtJQ6+dRV3dUjBvEuHTy+XzgjIDvd6oLrGHld4ig='; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; frame-src 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="莊馥瑀 Yui｜專案管理 × AI 應用規劃。把模糊的想法與分歧的需求，整合、轉換成做得出來的規格與交付成果。">
+<meta property="og:title" content="莊馥瑀 Yui">
+<meta property="og:description" content="莊馥瑀 Yui｜專案管理 × AI 應用規劃。把模糊的想法與分歧的需求，整合、轉換成做得出來的規格與交付成果。">
+<meta property="og:type" content="website">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23FF4D00'/%3E%3Cpath d='M14 12h11l7 14 7-14h11L37 38v14H27V38z' fill='%23fff' stroke='%23111' stroke-width='3' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>莊馥瑀 Yui</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=DM+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;900&display=swap">
+<script>
+/* Hides the hero for a moment so the entrance can play; always released after 3s even if nothing else runs. */
+(function () {
+  var r = document.documentElement;
+  try { if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; } catch (e) { return; }
+  r.classList.add('intro-pending');
+  setTimeout(function () { r.classList.remove('intro-pending'); }, 3000);
+})();
+</script>
+<style>
+/* Layout: one long poster. Full-bleed colour bands cut hard against each other (orange / white / ink);
+   every band has its own off-centre composition, and type is allowed to bleed past the edge.
+   One fixed look by choice: four colours, no dark variant. */
+:root{
+  --orange:#FF4D00; --ink:#111111; --white:#FFFFFF; --cobalt:#1F3BFF;
+  --f-display:"Bricolage Grotesque","Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC",sans-serif;
+  --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei","Heiti TC",system-ui,sans-serif;
+  --f-mono:"DM Mono","Noto Sans TC",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --bw:3px; --bw2:2px;
+  --pad:clamp(16px,4vw,64px);
+  --gl:max(var(--pad),env(safe-area-inset-left,0px));
+  --gr:max(var(--pad),env(safe-area-inset-right,0px));
+  --top:env(safe-area-inset-top,0px);
+  --star12:polygon(50.00% 0.00%,60.35% 11.36%,75.00% 6.70%,78.28% 21.72%,93.30% 25.00%,88.64% 39.65%,100.00% 50.00%,88.64% 60.35%,93.30% 75.00%,78.28% 78.28%,75.00% 93.30%,60.35% 88.64%,50.00% 100.00%,39.65% 88.64%,25.00% 93.30%,21.72% 78.28%,6.70% 75.00%,11.36% 60.35%,0.00% 50.00%,11.36% 39.65%,6.70% 25.00%,21.72% 21.72%,25.00% 6.70%,39.65% 11.36%);
+  --star16:polygon(50.00% 0.00%,58.39% 7.83%,69.13% 3.81%,73.89% 14.25%,85.36% 14.64%,85.75% 26.11%,96.19% 30.87%,92.17% 41.61%,100.00% 50.00%,92.17% 58.39%,96.19% 69.13%,85.75% 73.89%,85.36% 85.36%,73.89% 85.75%,69.13% 96.19%,58.39% 92.17%,50.00% 100.00%,41.61% 92.17%,30.87% 96.19%,26.11% 85.75%,14.64% 85.36%,14.25% 73.89%,3.81% 69.13%,7.83% 58.39%,0.00% 50.00%,7.83% 41.61%,3.81% 30.87%,14.25% 26.11%,14.64% 14.64%,26.11% 14.25%,30.87% 3.81%,41.61% 7.83%);
+  --star8:polygon(50.00% 0.00%,61.86% 21.36%,85.36% 14.64%,78.64% 38.14%,100.00% 50.00%,78.64% 61.86%,85.36% 85.36%,61.86% 78.64%,50.00% 100.00%,38.14% 78.64%,14.64% 85.36%,21.36% 61.86%,0.00% 50.00%,21.36% 38.14%,14.64% 14.64%,38.14% 21.36%);
+  --star4:polygon(50.00% 0.00%,60.61% 39.39%,100.00% 50.00%,60.61% 60.61%,50.00% 100.00%,39.39% 60.61%,0.00% 50.00%,39.39% 39.39%);
+  --ease:cubic-bezier(.2,.8,.2,1);
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--orange);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.75;font-weight:400;overflow-x:hidden;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+h1,h2,h3,h4,p,ul,ol,dl,dd,figure{margin:0;padding:0}
+h1,h2,h3,h4{font-size:inherit;font-weight:900;text-wrap:balance}
+ul,ol{list-style:none}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+b{font-weight:inherit}
+i{font-style:normal}
+button{font:inherit;color:inherit;background:none;border:0;border-radius:0;padding:0;cursor:pointer}
+mark{background:var(--orange);color:var(--ink);padding:0 .1em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+:focus-visible{outline:var(--bw) solid var(--ink);outline-offset:3px;box-shadow:0 0 0 3px var(--white)}
+[tabindex="-1"]:focus{outline:none;box-shadow:none}
+
+/* colour bands */
+.bg-o{background:var(--orange);color:var(--ink)}
+.bg-w{background:var(--white);color:var(--ink)}
+.bg-k{background:var(--ink);color:var(--white)}
+.band{position:relative;padding-left:var(--gl);padding-right:var(--gr);padding-block:clamp(72px,9vw,150px);overflow:clip}
+
+/* paper grain: sits on the colour field only, under the content, so photos and text stay clean */
+.paper{isolation:isolate}
+.paper::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-size:220px 220px;opacity:.2;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.7 -.62'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E")}
+.bg-k.paper::before{opacity:.13;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1.7 -.62'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* shared pieces */
+.mono{font-family:var(--f-mono);font-size:13px;line-height:1.5;letter-spacing:.04em;font-weight:500}
+.eyebrow{display:inline-block;font-family:var(--f-mono);font-size:13px;line-height:1.5;letter-spacing:.06em;font-weight:500;border-bottom:var(--bw) solid currentColor;padding-bottom:4px}
+.tag{display:inline-block;font-family:var(--f-mono);font-weight:500;font-size:13px;line-height:1.3;letter-spacing:.04em;color:var(--ink);background:var(--white);border:var(--bw2) solid var(--ink);padding:.5em .8em;box-shadow:3px 3px 0 var(--ink);transform:rotate(-2deg)}
+.frame{border:4px solid var(--ink);background:var(--white);box-shadow:11px 11px 0 var(--ink)}
+.cap{margin-top:24px;font-weight:400;max-width:62ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips li{font-family:var(--f-mono);font-size:13px;font-weight:500;line-height:1.4;border:var(--bw2) solid currentColor;padding:.3em .7em}
+.split .ch{display:inline}
+[data-split="pop"] .ch{display:inline-block;will-change:transform}
+
+/* buttons: the label inverts as the block fills from the bottom */
+.btn{position:relative;isolation:isolate;display:inline-flex;align-items:center;font-family:var(--f-display);font-weight:900;font-size:17px;line-height:1;color:var(--white);background:var(--white);border:var(--bw2) solid var(--ink);padding:.8em 1.1em;text-decoration:none;overflow:hidden}
+.btn::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--ink);transform:translateY(101%)}
+.btn > span{position:relative;mix-blend-mode:difference;white-space:pre}
+.btn-k{background:var(--ink)}
+.btn-k::before{background:var(--white)}
+@media (hover:hover){.btn:hover::before{transform:translateY(0)}}
+.btn:focus-visible::before{transform:translateY(0)}
+@media (prefers-reduced-motion:no-preference){.btn::before{transition:transform .3s var(--ease)}}
+
+/* skip link */
+.skip{position:fixed;left:var(--gl);top:calc(var(--top) + 22px);z-index:160;background:var(--white);color:var(--ink);border:var(--bw) solid var(--ink);padding:.6em .9em;font-family:var(--f-mono);font-size:13px;font-weight:500;transform:translateY(-260%)}
+.skip:focus{transform:none}
+
+/* reading progress */
+.progress{position:fixed;inset:0 0 auto 0;z-index:120;height:calc(10px + var(--top));padding-top:var(--top);background:var(--white);border-bottom:var(--bw) solid var(--ink)}
+.progress i{display:block;height:100%;background:var(--cobalt);transform:scaleX(0);transform-origin:0 50%}
+
+/* nav: one quiet bar */
+.nav{position:fixed;z-index:110;top:calc(var(--top) + 24px);right:max(16px,env(safe-area-inset-right,0px));display:flex;align-items:center;gap:8px}
+.nav-links{display:flex;background:var(--white);border:var(--bw2) solid var(--ink)}
+.nav-links a{display:block;font-family:var(--f-mono);font-size:12px;font-weight:500;letter-spacing:.04em;line-height:1;color:var(--ink);padding:9px 11px;text-decoration:none;white-space:nowrap}
+.nav-links li + li a{border-left:1.5px solid var(--ink)}
+.nav-menu,.lang-btn{display:block;font-family:var(--f-mono);font-size:12px;font-weight:500;letter-spacing:.04em;line-height:1;color:var(--ink);background:var(--white);border:var(--bw2) solid var(--ink);padding:9px 10px;white-space:nowrap}
+@media (hover:hover){
+  .nav-links a:hover{background:var(--ink);color:var(--white)}
+  .nav-menu:hover,.lang-btn:hover{background:var(--orange)}
+  .lang-btn.is-on:hover{background:var(--ink)}
+}
+.lang{display:flex}
+.lang-btn + .lang-btn{margin-left:calc(var(--bw2) * -1)}
+.lang-btn.is-on{background:var(--ink);color:var(--white)}
+.nav-menu{display:none}
+@media (max-width:980px){
+  html.js .nav-menu{display:block}
+  .nav-links{display:none}
+  html.js .nav-links{display:flex;position:fixed;inset:0;z-index:-1;flex-direction:column;justify-content:center;gap:2px;background:var(--orange);border:0;padding:calc(var(--top) + 90px) var(--gr) 40px var(--gl);transform:translateY(-102%);visibility:hidden}
+  html.js .nav.is-open .nav-links{transform:none;visibility:visible}
+  html.js .nav-links a{font-family:var(--f-display);font-weight:900;font-size:clamp(34px,10.5vw,64px);line-height:1.12;letter-spacing:-.01em;background:none;border:0;padding:.08em 0}
+  html.js .nav.is-open .nav-menu{background:var(--ink);color:var(--white)}
+}
+@media (max-width:980px) and (prefers-reduced-motion:no-preference){
+  html.js .nav-links{transition:transform .45s var(--ease),visibility 0s linear .45s}
+  html.js .nav.is-open .nav-links{transition:transform .45s var(--ease),visibility 0s}
+}
+
+/* text links inside captions and case sheets */
+.cap a,.case-body a:not(.btn){color:inherit;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+
+/* ---------- 1. hero. The Chinese name sits on top with a white sticker "Yui"
+   tucked under it, and the positioning beside the sticker. Everything else keeps clear of everything else:
+   the photo, the badge and the keyword band never crowd each other. ---------- */
+.hero{position:relative;overflow:clip;display:flex;flex-direction:column;min-height:100vh;min-height:min(100svh,1000px);padding-top:calc(var(--top) + 88px)}
+html.intro-pending .hero-grid,html.intro-pending .marquee{opacity:0}
+.hero-grid{flex:1 0 auto;display:grid;grid-template-columns:minmax(0,1fr) clamp(220px,27vw,420px);column-gap:clamp(28px,4.6vw,88px);align-items:center;align-content:center;padding-left:var(--gl);padding-right:var(--gr)}
+.hero-text{display:grid;justify-items:start;min-width:0}
+.hero-hello{margin-bottom:clamp(6px,1vw,14px)}
+.hero-hello .tag{font-size:14px;transform:rotate(-3deg)}
+.name{font-family:var(--f-display);font-weight:900;line-height:.92;letter-spacing:-.02em;white-space:nowrap;position:relative;z-index:2;font-size:clamp(84px,min(14.6vw,23vh),300px)}
+.name-zh{margin-left:-.045em}
+.name-zh:empty{display:none}
+.name .ch{cursor:default}
+.name-row{display:flex;align-items:center;gap:clamp(22px,3vw,52px);max-width:100%}
+.name-en br{display:none}
+.name-en{flex:none;color:var(--white);-webkit-text-stroke:.05em var(--ink);paint-order:stroke fill;text-shadow:.04em .04em 0 var(--ink);transform:rotate(-4deg);transform-origin:0 100%;margin-top:-.02em;padding-right:.06em}
+
+/* beside the sticker: positioning, then the one-sentence value */
+.hero-say{display:grid;gap:clamp(8px,1vw,14px);justify-items:start;min-width:0;padding-top:clamp(4px,1.2vw,20px)}
+.hero-pos{display:grid;gap:9px;justify-items:start;min-width:0}
+.pos-l{font-size:12px;letter-spacing:.12em;line-height:1;border:var(--bw2) solid var(--ink);padding:.42em .6em .4em .7em}
+.pos{display:flex;flex-wrap:wrap;align-items:baseline;gap:.1em .42em;font-family:var(--f-display);font-size:clamp(20px,2.3vw,34px);line-height:1.15;text-wrap:initial}
+.pos span{white-space:nowrap}
+/* the × is drawn, so it can turn on its own centre */
+.pos i{position:relative;display:block;flex:none;align-self:center;width:.56em;height:.56em;overflow:hidden;text-indent:-9em}
+.pos i::before,.pos i::after{content:"";position:absolute;left:-12%;top:50%;width:124%;height:.14em;margin-top:-.07em;background:var(--white);transform:rotate(45deg)}
+.pos i::after{transform:rotate(-45deg)}
+@media (prefers-reduced-motion:no-preference){.pos i{animation:xturn 5.5s var(--ease) infinite}}
+@keyframes xturn{0%,74%{transform:rotate(0)}100%{transform:rotate(180deg)}}
+.hero-value{max-width:24em;font-weight:500;font-size:clamp(15.5px,1.36vw,20px);line-height:1.7}
+.nb{display:inline-block}
+
+.hero-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:clamp(20px,2.6vw,38px)}
+.hero-cta .btn{font-size:16px}
+/* three proofs: a quiet row under one rule */
+.proofs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;max-width:760px;margin-top:clamp(22px,2.8vw,44px);border-top:var(--bw2) solid var(--ink)}
+.proofs li{display:grid;gap:4px;align-content:start;padding:13px clamp(12px,1.6vw,26px) 0 0;min-width:0}
+.proofs li + li{padding-left:clamp(12px,1.6vw,26px);border-left:1.5px solid var(--ink)}
+.proofs b{font-family:var(--f-display);font-weight:900;font-size:clamp(22px,2.3vw,35px);line-height:1;white-space:nowrap}
+.proofs span{font-size:13.5px;font-weight:500;line-height:1.5}
+
+/* the badge sits on the photo's left edge and stays inside its height, so nothing hangs towards the band */
+.hero-photo{position:relative;z-index:1}
+.photo-a{width:100%;max-width:450px;aspect-ratio:896/1195;margin-left:auto;overflow:hidden;transform:rotate(2.5deg)}
+.photo-a img{width:100%;height:100%;object-fit:cover}
+.hero-loc{position:absolute;top:-15px;right:-8px;z-index:3;white-space:nowrap;transform:rotate(5deg)}
+.badge{position:absolute;left:clamp(-74px,-5.1vw,-36px);bottom:clamp(18px,2.4vw,40px);width:clamp(100px,10.4vw,156px);aspect-ratio:1;z-index:3}
+.badge svg{display:block;width:100%;height:100%;overflow:visible}
+.badge-disc{fill:var(--cobalt);stroke:var(--ink);stroke-width:5}
+.badge-t{font-family:var(--f-display);font-weight:900;font-size:16.5px;fill:var(--white);letter-spacing:.02em}
+.badge-star{fill:var(--white);stroke:var(--ink);stroke-width:4;stroke-linejoin:miter}
+@media (prefers-reduced-motion:no-preference){.badge svg{animation:spin 26s linear infinite}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* five keywords, always moving; a clear gap above keeps the band apart from the photo */
+.marquee{position:relative;padding-top:clamp(60px,6.6vw,100px);padding-bottom:clamp(30px,4vw,60px)}
+.marquee-band{width:112vw;margin-left:-6vw;overflow:hidden;background:var(--ink);color:var(--white);transform:rotate(-1.5deg);padding-block:.42em;font-size:clamp(18px,2.1vw,31px)}
+.marquee-run{display:flex;width:max-content}
+.marquee-track{display:flex;flex:none}
+.marquee-track li{display:flex;align-items:center;font-family:var(--f-display);font-weight:900;line-height:1.25;white-space:nowrap}
+.marquee-track li::after{content:"";flex:none;width:.5em;height:.5em;margin-inline:.75em;background:var(--orange);clip-path:var(--star4)}
+@media (prefers-reduced-motion:no-preference){.marquee-run{animation:marq 48s linear infinite}}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+html[lang="en"] .name-row{flex-direction:column;align-items:flex-start;gap:clamp(14px,1.6vw,24px)}
+/* English: the full name on one line */
+html[lang="en"] .name-en{font-size:clamp(64px,min(11.2vw,22vh),230px);margin-left:.02em;margin-top:0}
+html[lang="en"] .hero-say{padding-top:0}
+html[lang="en"] .hero-value{max-width:34em}
+html[lang="en"] .pos{font-size:clamp(17px,1.75vw,27px)}
+
+@media (max-width:760px){
+  .hero{min-height:0;padding-top:calc(var(--top) + 84px)}
+  .hero-grid{grid-template-columns:minmax(0,1fr);grid-template-areas:"hello" "zh" "photo" "en" "pos" "value" "cta" "proofs";align-items:start;align-content:start}
+  .hero-text,.name-row,.hero-say{display:contents}
+  .hero-hello{grid-area:hello}
+  .name{font-size:29.5vw}
+  .name-zh{grid-area:zh}
+  .hero-photo{grid-area:photo;width:min(64vw,450px);justify-self:end;margin-top:-3vw;margin-right:3vw}
+  .name-en{grid-area:en;font-size:37vw;margin-top:-27vw;z-index:4;justify-self:start}
+  .hero-pos{grid-area:pos;margin-top:1.3em}
+  .pos{font-size:clamp(19px,5.6vw,26px)}
+  .hero-value{grid-area:value;max-width:none;font-size:17px;margin-top:14px}
+  .hero-cta{grid-area:cta;margin-top:22px}
+  .hero-cta .btn{flex:1 1 auto;justify-content:center}
+  .proofs{grid-area:proofs;grid-template-columns:minmax(0,1fr);border-top:0;margin-top:28px}
+  .proofs li{grid-template-columns:auto minmax(0,1fr);align-items:baseline;gap:14px;padding:12px 0;border-top:var(--bw2) solid var(--ink)}
+  .proofs li + li{padding-left:0;border-left:0}
+  .proofs b{font-size:clamp(24px,7.4vw,32px)}
+  .badge{left:-17vw;bottom:auto;top:16%;width:27vw}
+  .hero-loc{top:10vw;right:-10px}
+  .marquee{padding-top:44px;padding-bottom:30px}
+  .marquee-band{font-size:20px}
+  html[lang="en"] .hero-grid{grid-template-areas:"hello" "photo" "en" "pos" "value" "cta" "proofs"}
+  html[lang="en"] .hero-photo{margin-top:8px}
+  html[lang="en"] .hero-loc{top:-12px;right:-8px}
+  html[lang="en"] .name-en{font-size:26.5vw;line-height:.88;margin-top:-17vw}
+  html[lang="en"] .name-en br{display:inline}
+  html[lang="en"] .pos{font-size:clamp(17px,4.9vw,23px)}
+}
+
+/* ---------- 2. motto in three beats: each panel sticks and the next slides over it.
+   The notes follow the scroll: scattered, then lined up, then turned into deliverables. ---------- */
+.beats{position:relative;display:flow-root;background:var(--ink)}
+.beat{position:sticky;top:0;height:100vh;height:min(100svh,980px);min-height:480px;overflow:clip;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto minmax(0,1fr) auto;
+  padding:calc(var(--top) + 88px) var(--gr) clamp(28px,5vh,60px) var(--gl)}
+/* each panel holds for a stretch after it lands; the notes move during that hold.
+   The last one needs real room after it (a sticky box cannot travel into its own margin). */
+.beat-1,.beat-2{margin-bottom:40vh}
+.beat-hold{height:40vh}
+.beat-meta{grid-area:1 / 1;display:flex;align-items:center;gap:.9em;position:relative;z-index:3}
+.beat-meta b{border:var(--bw2) solid currentColor;padding:.1em .5em}
+.beat-meta span{font-family:var(--f-body);font-weight:900;font-size:16px;letter-spacing:.1em}
+.beat-word{font-family:var(--f-display);font-weight:900;line-height:.94;letter-spacing:-.02em;white-space:nowrap;position:relative;z-index:2;font-size:min(var(--fs),var(--fsh))}
+.beat-cap{position:relative;z-index:3;font-weight:900;font-size:clamp(19px,2vw,30px);line-height:1.35;max-width:13em}
+.beat-cap::before{content:"";display:block;width:2.6em;height:var(--bw);background:currentColor;margin-bottom:.7em}
+.stage{position:absolute;z-index:3}
+
+.nt{font-weight:900;font-size:clamp(15px,1.5vw,23px);line-height:1;white-space:nowrap;padding:.5em .72em .56em;background:var(--white);color:var(--ink);border:var(--bw2) solid var(--ink)}
+.oc{display:flex;align-items:center;gap:.6em;font-family:var(--f-display);font-weight:900;font-size:clamp(18px,2vw,31px);line-height:1;white-space:nowrap;background:var(--white);color:var(--ink);border:var(--bw2) solid var(--ink);box-shadow:5px 5px 0 var(--ink);padding:.55em .7em .6em}
+.oc::before{content:"";flex:none;width:.62em;height:.62em;background:var(--ink)}
+
+/* 1: everyone's concerns, all over the place */
+.beat-1 .beat-word{grid-area:3 / 1 / 4 / 3;align-self:end;margin-left:-.04em;--fs:21vw;--fsh:44vh}
+.beat-1 .beat-cap{grid-area:2 / 1 / 3 / 2;align-self:start;margin-top:clamp(18px,4vh,46px)}
+.beat-1 .stage{right:var(--gr);top:calc(var(--top) + 100px);width:46vw;height:40vh}
+.s1 .nt{position:absolute;box-shadow:4px 4px 0 var(--ink)}
+.s1 .n1{left:4%;top:8%;transform:rotate(-9deg)}
+.s1 .n2{left:54%;top:0;transform:rotate(7deg)}
+.s1 .n3{left:70%;top:44%;transform:rotate(-13deg);background:var(--orange)}
+.s1 .n4{left:0;top:58%;transform:rotate(11deg)}
+.s1 .n5{left:36%;top:80%;transform:rotate(-5deg)}
+.s1 .n6{left:30%;top:34%;transform:rotate(15deg);background:var(--cobalt);color:var(--white)}
+
+/* 2: the same notes, lined up under one goal */
+.beat-2 .beat-word{grid-area:2 / 1 / 3 / 3;align-self:center;margin-left:-.04em;--fs:17.4vw;--fsh:40vh}
+.beat-2 .beat-cap{grid-area:3 / 1 / 4 / 2;align-self:end;color:var(--orange)}
+.beat-2 .stage{right:var(--gr);bottom:clamp(28px,5vh,60px)}
+.s2{display:grid;grid-template-columns:repeat(3,max-content);gap:8px}
+.s2 .goal{grid-column:1 / -1;justify-self:start;font-family:var(--f-display);font-weight:900;font-size:clamp(17px,1.7vw,26px);line-height:1;background:var(--orange);color:var(--ink);padding:.45em .7em .5em;margin-bottom:2px}
+.s2 .nt{text-align:center;min-width:5.4em}
+
+/* 3: what comes out */
+.beat-3 .beat-word{grid-area:2 / 1 / 3 / 3;align-self:start;margin-top:2.6vh;margin-left:-.04em;--fs:17.4vw;--fsh:24vh}
+.beat-3 .beat-cap{grid-area:3 / 1 / 4 / 2;align-self:end}
+.beat-3 .stage{right:var(--gr);bottom:clamp(28px,5vh,60px);width:min(38vw,520px)}
+.s3{display:grid;gap:10px}
+.s3 .oc:nth-child(2){margin-left:8%}
+.s3 .oc:nth-child(3){margin-left:16%}
+
+html[lang="en"] .beat-1 .beat-word{--fs:15.2vw;--fsh:24vh}
+html[lang="en"] .beat-2 .beat-word{--fs:13.6vw;--fsh:23vh}
+html[lang="en"] .beat-3 .beat-word{--fs:12.2vw;--fsh:23vh}
+
+@media (max-height:640px) and (min-width:761px){
+  .beat-1 .stage{height:29vh}
+  .nt{font-size:14px}
+  .oc{font-size:17px}
+  .beat-cap{font-size:18px}
+}
+@media (max-width:760px){
+  .beat{padding-top:calc(var(--top) + 80px)}
+  .beat-cap{font-size:clamp(18px,5.2vw,23px)}
+  .nt{font-size:15px}
+  .oc{font-size:19px}
+  /* Chinese: the phrase runs down the page */
+  html:not([lang="en"]) .beat-word{writing-mode:vertical-rl;text-orientation:upright;line-height:1.02;letter-spacing:0;margin:0}
+  html:not([lang="en"]) .beat-1 .beat-word{grid-area:2 / 1 / 4 / 2;align-self:center;justify-self:start;--fs:35vw;--fsh:17.5vh}
+  html:not([lang="en"]) .beat-1 .beat-cap{grid-area:3 / 1 / 4 / 3;align-self:end;justify-self:end;text-align:right;max-width:none;white-space:nowrap;margin-top:0}
+  html:not([lang="en"]) .beat-1 .beat-cap::before{margin-left:auto}
+  html:not([lang="en"]) .beat-1 .stage{right:4vw;top:calc(var(--top) + 150px);width:52vw;height:34vh}
+  html:not([lang="en"]) .beat-2 .beat-word{grid-area:2 / 1 / 4 / 2;align-self:center;justify-self:start;--fs:31vw;--fsh:14.6vh}
+  html:not([lang="en"]) .beat-2 .beat-cap{grid-area:3 / 1 / 4 / 3;align-self:end;justify-self:end;text-align:right;max-width:none;white-space:nowrap}
+  html:not([lang="en"]) .beat-2 .beat-cap::before{margin-left:auto}
+  .s2{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .s2 .nt{min-width:0;overflow:hidden;text-overflow:ellipsis}
+  html:not([lang="en"]) .beat-2 .stage{right:var(--gr);left:auto;bottom:auto;top:calc(var(--top) + 170px);width:52vw}
+  html:not([lang="en"]) .beat-3 .beat-word{grid-area:2 / 1 / 3 / 3;justify-self:start;margin-top:12px;--fs:26vw;--fsh:11.4vh}
+  html:not([lang="en"]) .beat-3 .beat-cap{display:none}
+  html:not([lang="en"]) .beat-3 .stage{bottom:clamp(24px,4vh,44px);width:62vw}
+  /* English: the phrase stays horizontal, the notes sit between the label and the phrase */
+  html[lang="en"] .beat-1 .beat-word{--fs:16.4vw;--fsh:30vh}
+  html[lang="en"] .beat-2 .beat-word{align-self:start;margin-top:3vh;--fs:14.6vw;--fsh:30vh}
+  html[lang="en"] .beat-3 .beat-word{--fs:13.2vw;--fsh:30vh}
+  html[lang="en"] .beat-cap{display:none}
+  html[lang="en"] .beat-1 .stage{left:var(--gl);right:var(--gr);width:auto;top:calc(var(--top) + 130px);height:36vh}
+  html[lang="en"] .beat-2 .stage,html[lang="en"] .beat-3 .stage{left:var(--gl);right:var(--gr);width:auto}
+}
+
+/* ---------- 2b. how I work: a statement, five keyword stickers, four cards ---------- */
+.work-top{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(28px,6vw,110px);align-items:start}
+.work-lead{display:grid;gap:22px;justify-items:start}
+.work-self{font-weight:900;font-size:clamp(23px,2.75vw,44px);line-height:1.42;letter-spacing:.01em}
+html[lang="en"] .work-self{font-family:var(--f-display);line-height:1.16;font-size:clamp(24px,3vw,48px)}
+.kws{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:18px 14px;padding-top:clamp(0px,3.4vw,56px)}
+.kw{font-family:var(--f-display);font-weight:900;font-size:clamp(22px,2.7vw,44px);line-height:1;white-space:nowrap;padding:.42em .62em .48em;border:var(--bw) solid var(--ink);box-shadow:6px 6px 0 var(--ink)}
+.kw-1{background:var(--white);transform:rotate(-3deg)}
+.kw-2{background:var(--orange);transform:rotate(2deg)}
+.kw-3{background:var(--ink);color:var(--white);box-shadow:6px 6px 0 var(--orange);transform:rotate(-1.5deg)}
+.kw-4{background:var(--white);border-radius:999px;padding-inline:.9em;transform:rotate(3deg)}
+.kw-5{background:var(--cobalt);color:var(--white);transform:rotate(-2.5deg)}
+.ways{display:grid;gap:clamp(22px,2.6vw,40px);margin-top:clamp(56px,7.5vw,120px)}
+.way{display:grid;gap:12px;align-content:start;justify-items:start;border:var(--bw) solid var(--ink);box-shadow:8px 8px 0 var(--ink);padding:clamp(22px,2.4vw,38px);background:var(--white)}
+.way-t{background:var(--ink);color:var(--white);padding:.3em .7em}
+.way h3{font-size:clamp(21px,2.05vw,31px);line-height:1.3}
+.way-b{font-size:16px;line-height:1.8}
+.way-2{background:var(--orange)}
+.way-3{background:var(--ink);color:var(--white);box-shadow:8px 8px 0 var(--orange)}
+.way-3 .way-t{background:var(--white);color:var(--ink)}
+@media (min-width:761px){
+  .ways{grid-template-columns:repeat(12,minmax(0,1fr))}
+  .way-1{grid-column:1 / span 5;transform:rotate(-1deg)}
+  .way-2{grid-column:6 / span 7;transform:rotate(.8deg);margin-top:clamp(24px,4vw,64px)}
+  .way-3{grid-column:2 / span 6;transform:rotate(.6deg)}
+  .way-4{grid-column:8 / span 5;transform:rotate(-1.4deg);margin-top:clamp(24px,4vw,64px)}
+}
+@media (max-width:760px){
+  .work-top{grid-template-columns:minmax(0,1fr)}
+  .kws{justify-content:flex-start;gap:14px 10px}
+  .kw{font-size:clamp(20px,6.4vw,30px);box-shadow:4px 4px 0 var(--ink)}
+  .kw-3{box-shadow:4px 4px 0 var(--orange)}
+  .way:nth-child(odd){margin-right:5vw;transform:rotate(-.8deg)}
+  .way:nth-child(even){margin-left:5vw;transform:rotate(.8deg)}
+}
+
+/* ---------- 3. AI work first: training, certificate, one team project ---------- */
+.ai-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(20px,5vw,90px);align-items:end;margin-bottom:clamp(34px,4.6vw,72px)}
+.ai-title{font-family:var(--f-display);font-size:clamp(64px,13.4vw,240px);line-height:.92;letter-spacing:-.02em;color:var(--orange);margin-left:-.04em;text-wrap:initial}
+html[lang="en"] .ai-title{font-size:clamp(52px,9.6vw,176px)}
+.ai-lead{font-weight:500;font-size:clamp(16.5px,1.4vw,21px);line-height:1.75;padding-bottom:.6em}
+
+.creds{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(22px,2.8vw,44px);align-items:start}
+.cred{position:relative;display:grid;gap:12px;justify-items:start;align-content:start;padding:clamp(20px,2.4vw,38px)}
+.cred h3{font-size:clamp(22px,2.5vw,40px);line-height:1.25}
+html[lang="en"] .cred h3{font-family:var(--f-display);line-height:1.1}
+.cred-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}
+.cred-hrs{background:var(--cobalt);color:var(--white);padding:.1em .6em}
+.cred-note:empty{display:none}
+.cred-train{background:var(--orange);color:var(--ink);box-shadow:10px 10px 0 var(--white);transform:rotate(-.8deg)}
+.cred-train .chips{margin-top:4px}
+.cred-cert{background:var(--white);color:var(--ink);grid-template-columns:minmax(0,1fr) auto;column-gap:clamp(12px,1.6vw,24px);align-items:center;margin-top:clamp(0px,3vw,50px);transform:rotate(.8deg)}
+.cred-cert > *{grid-column:1}
+.cred-cert h3{font-size:clamp(21px,2.1vw,34px)}
+.cred-cert .cred-burst{grid-column:2;grid-row:1 / span 3;margin-right:clamp(-34px,-2vw,-14px)}
+
+/* the team project: one white sheet */
+.case{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(20px,4vw,72px);align-items:start;margin-top:clamp(48px,6vw,96px);padding:clamp(24px,3vw,50px);background:var(--white);color:var(--ink)}
+.case-head{display:grid;gap:10px;justify-items:start}
+.case-meta{display:flex;flex-wrap:wrap;gap:6px 8px}
+.case-meta span{border:var(--bw2) solid currentColor;padding:.25em .6em}
+.case-meta .case-kicker{background:var(--ink);color:var(--white);border-color:var(--ink)}
+.case-name{font-family:var(--f-display);font-size:clamp(44px,6.4vw,112px);line-height:1;letter-spacing:-.015em;text-wrap:balance}
+.case-note:empty{display:none}
+.case-sub{font-weight:900;font-size:clamp(18px,1.8vw,28px);line-height:1.3}
+/* where it started → my part → the result */
+.strip{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px 0;margin-top:12px}
+.strip li{position:relative;display:flex;align-items:center;font-weight:900;font-size:clamp(14px,1.1vw,16.5px);line-height:1.25;padding:.6em .8em;border:var(--bw2) solid currentColor;margin-right:30px}
+.strip li:last-child{margin-right:0}
+.strip li:not(:last-child)::after{content:"→";position:absolute;right:-27px;top:50%;transform:translateY(-52%);font-family:var(--f-display);font-weight:900;font-size:20px;line-height:1;color:var(--ink)}
+.strip .me{background:var(--ink);color:var(--white);border-color:var(--ink)}
+.case-body{display:grid}
+.case-body > div{display:grid;grid-template-columns:clamp(84px,8vw,120px) minmax(0,1fr);gap:10px 18px;align-items:baseline;border-top:var(--bw2) solid currentColor;padding-block:14px}
+.case-body > div:last-child{padding-bottom:0}
+.case-body dd{font-size:clamp(15.5px,1.2vw,17.5px);line-height:1.7;display:grid;gap:10px;justify-items:start}
+.case-body dd.strong{font-weight:900;font-size:clamp(16.5px,1.35vw,20px);line-height:1.5}
+.case-link{margin-top:4px}
+.detail-list{display:grid;gap:6px}
+.detail-list li{position:relative;padding-left:1.3em}
+.detail-list li::before{content:"";position:absolute;left:0;top:.8em;width:.62em;height:var(--bw2);background:currentColor}
+
+/* two more, kept short: outlined, so the white sheet above stays the main piece */
+.minis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,2vw,32px);margin-top:clamp(18px,2.2vw,34px)}
+.mini{display:grid;gap:10px;align-content:start;justify-items:start;border:var(--bw2) solid var(--white);padding:clamp(18px,2.2vw,34px)}
+.mini .case-kicker{background:var(--white);color:var(--ink);border-color:var(--white)}
+.mini-name{font-family:var(--f-display);font-size:clamp(26px,3vw,48px);line-height:1.1;letter-spacing:-.01em}
+.mini-sub{font-weight:900;font-size:clamp(16px,1.35vw,20px);line-height:1.5}
+.mini-body{display:grid;width:100%;margin-top:8px}
+.mini-body > div{display:grid;grid-template-columns:clamp(70px,6.4vw,96px) minmax(0,1fr);gap:8px 16px;align-items:baseline;border-top:1.5px solid var(--white);padding-block:11px}
+.mini-body > div:last-child{padding-bottom:0}
+.mini-body dd{font-size:clamp(15px,1.15vw,16.5px);line-height:1.65}
+.mini-body dd.strong{font-weight:900}
+
+@media (max-width:860px){
+  .ai-head,.creds,.case,.minis{grid-template-columns:minmax(0,1fr)}
+  .ai-title{font-size:clamp(64px,24vw,150px)}
+  html[lang="en"] .ai-title{font-size:clamp(52px,17vw,110px)}
+  .cred-train{box-shadow:6px 6px 0 var(--white)}
+  .cred-cert{margin-top:0;margin-right:18px}
+  .case-body > div,.mini-body > div{grid-template-columns:minmax(0,1fr);gap:4px}
+  .case-name{font-size:clamp(44px,14vw,80px)}
+  /* narrow: the three steps stack, with the arrow pointing down */
+  .strip{flex-direction:column;align-items:flex-start;gap:0}
+  .strip li{margin-right:0;margin-bottom:30px}
+  .strip li:last-child{margin-bottom:0}
+  .strip li:not(:last-child)::after{content:"↓";right:auto;left:18px;top:calc(100% + 5px);transform:none}
+}
+
+/* ---------- 4. featured project: CMP Inspiration ---------- */
+.cmp-intro{padding-bottom:clamp(64px,8vw,130px)}
+.cmp-meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:clamp(8px,1.4vw,22px)}
+.cmp-meta span{background:var(--white);border:var(--bw) solid var(--ink);padding:.35em .7em}
+.cmp-meta span:first-child{background:var(--ink);color:var(--white)}
+.cmp-title{font-family:var(--f-display);font-size:clamp(72px,18.4vw,330px);line-height:.94;letter-spacing:-.02em;white-space:nowrap;margin-left:-.045em;position:relative;z-index:2;text-wrap:initial}
+html[lang="en"] .cmp-title{font-size:clamp(58px,13vw,250px);line-height:.86;margin-left:-.03em}
+.cmp-lead{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(28px,5vw,96px);align-items:start;margin-top:clamp(-52px,-3vw,-14px)}
+html[lang="en"] .cmp-lead{margin-top:clamp(6px,1vw,16px)}
+.cmp-b{position:relative;z-index:1;max-width:800px}
+.cmp-b .frame{position:relative;overflow:hidden;transform:rotate(-1.2deg)}
+.cmp-b img{width:100%}
+.curtain{display:none;position:absolute;inset:-2px;background:var(--orange)}
+html.anim .curtain{display:block}
+.cmp-facts{display:grid;gap:22px;padding-top:clamp(64px,6.4vw,120px)}
+.cmp-facts dl{display:grid;gap:18px}
+.cmp-facts dt{margin-bottom:2px}
+.cmp-role{font-weight:900;font-size:clamp(30px,3.4vw,56px);line-height:1.1}
+html[lang="en"] .cmp-role{font-family:var(--f-display)}
+.cmp-unit{font-weight:500;line-height:1.6}
+.cmp-scope{font-size:clamp(16.5px,1.32vw,20px);font-weight:500;line-height:1.75;border-top:var(--bw) solid var(--ink);padding-top:20px}
+
+.did-h{font-family:var(--f-display);font-size:clamp(46px,8.4vw,150px);line-height:1;letter-spacing:-.015em;margin-bottom:clamp(34px,5vw,84px)}
+.did{display:grid;grid-template-columns:clamp(64px,11vw,190px) minmax(0,1fr);gap:clamp(14px,3vw,52px);align-items:start;border-top:var(--bw) solid var(--ink);padding-block:clamp(24px,3vw,46px)}
+.did-n{font-family:var(--f-display);font-weight:900;font-size:clamp(84px,13vw,230px);line-height:.78;color:var(--orange);-webkit-text-stroke:var(--bw) var(--ink)}
+.did h4{font-size:clamp(24px,2.8vw,46px);line-height:1.2;margin-bottom:12px}
+html[lang="en"] .did h4{font-family:var(--f-display)}
+.did p{font-size:clamp(16px,1.28vw,19px);max-width:40em}
+@media (min-width:761px){
+  .did{width:72%}
+  .did-2{margin-left:14%}
+  .did-3{margin-left:28%}
+}
+
+/* photo C: printed on orange first, back to its own colours as it passes */
+.cband{position:relative}
+.cband-view{position:relative;overflow:hidden;height:clamp(240px,43.5vw,900px);background:var(--white)}
+.cband-plain,.cband-print{position:absolute;inset:0}
+.cband-print{background:var(--orange);isolation:isolate}
+.cband-print img{mix-blend-mode:multiply}
+.cband-view img{position:absolute;left:0;top:0;width:112%;max-width:none;height:100%;object-fit:cover;object-position:50% 74%}
+.cband .cap{margin:0;max-width:none;padding:16px var(--gr) clamp(28px,4vw,60px) var(--gl)}
+
+.moment{padding-block:clamp(84px,11vw,190px)}
+.moment-meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:clamp(22px,3vw,50px);position:relative;z-index:1}
+.moment-meta span{border:var(--bw) solid var(--white);padding:.35em .7em}
+.moment-meta span:first-child{background:var(--orange);border-color:var(--orange);color:var(--ink)}
+.moment-q{font-weight:900;font-size:clamp(28px,5vw,88px);line-height:1.34;letter-spacing:.01em;max-width:17.6em;position:relative;z-index:1}
+html[lang="en"] .moment-q{font-family:var(--f-display);font-size:clamp(28px,4.5vw,80px);line-height:1.12;letter-spacing:-.01em;max-width:16em}
+.moment-mark{position:absolute;width:clamp(54px,8vw,130px);aspect-ratio:1;border:0 solid var(--orange);border-width:clamp(14px,2.1vw,34px) 0 0 clamp(14px,2.1vw,34px)}
+.mark-a{left:var(--gl);top:clamp(20px,2.4vw,40px)}
+.mark-b{right:var(--gr);bottom:clamp(20px,2.4vw,40px);transform:rotate(180deg)}
+
+.cmp-end{display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:clamp(28px,5vw,84px);align-items:end}
+.cmp-d{max-width:1060px}
+.cmp-d .frame{padding:clamp(7px,.9vw,14px);transform:rotate(1.4deg)}
+.cmp-d img{width:100%}
+.cmp-wrap{display:grid;gap:16px;justify-items:start;padding-bottom:clamp(30px,5vw,84px)}
+.wrap-t{font-weight:900;font-size:clamp(23px,2.5vw,40px);line-height:1.4;margin-bottom:10px}
+html[lang="en"] .wrap-t{font-family:var(--f-display);line-height:1.15}
+.also{display:flex;flex-wrap:wrap;gap:14px 12px}
+.also .tag{font-size:14px;transform:rotate(-1.5deg)}
+.also .tag:nth-child(2){transform:rotate(1.5deg)}
+
+@media (max-width:760px){
+  .cmp-title{font-size:23.4vw}
+  html[lang="en"] .cmp-title{font-size:19vw}
+  .cmp-lead{grid-template-columns:minmax(0,1fr);margin-top:-10px}
+  .cmp-b{margin-right:10px}
+  .cmp-facts{padding-top:6px}
+  .frame{box-shadow:9px 9px 0 var(--ink)}
+  .cband-view{height:74.6vw}
+  .moment-q{font-size:clamp(27px,7.8vw,40px)}
+  html[lang="en"] .moment-q{font-size:clamp(28px,8.4vw,44px)}
+  .moment{padding-block:118px 104px}
+  .cmp-end{grid-template-columns:minmax(0,1fr);gap:34px}
+  .cmp-d{margin-right:10px}
+  .cmp-wrap{padding-bottom:0}
+}
+
+.did-head{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(14px,4vw,72px);align-items:end;margin-bottom:clamp(34px,5vw,84px)}
+.did-head .did-h{margin-bottom:0}
+.did-lead{font-weight:900;font-size:clamp(18px,1.9vw,29px);line-height:1.45;border-left:var(--bw) solid var(--ink);padding-left:.8em}
+html[lang="en"] .did-lead{font-family:var(--f-display);line-height:1.22}
+.did .did-t{display:inline-block;font-size:13px;max-width:none;background:var(--ink);color:var(--white);padding:.25em .65em;margin-bottom:10px}
+@media (max-width:760px){.did-head{grid-template-columns:minmax(0,1fr)}}
+
+/* ---------- 5. numbers: three ruled rows. Left, where the figures come from; right, the figures on one shared grid,
+   so they line up down the page. ---------- */
+.nums{padding-block:clamp(64px,8vw,130px)}
+.nrow{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:clamp(18px,3.4vw,60px);align-items:start;border-top:var(--bw2) solid var(--white);padding-block:clamp(24px,3vw,48px)}
+.nrow:last-child{border-bottom:var(--bw2) solid var(--white)}
+.nrow-h{display:grid;gap:8px;justify-items:start;min-width:0}
+.nrow-h h3{font-weight:900;font-size:clamp(19px,1.9vw,28px);line-height:1.25}
+html[lang="en"] .nrow-h h3{font-family:var(--f-display);line-height:1.1}
+.nrow-s{font-size:12.5px}
+.nrow-note{font-weight:400;font-size:12px;line-height:1.6;max-width:22em;margin-top:6px}
+.nrow-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(22px,2.6vw,40px) clamp(14px,2.4vw,40px)}
+.n{display:grid;gap:8px;align-content:start;min-width:0}
+.n-wide{grid-column:span 2}
+.n-big{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 7px}
+.n-val{font-family:var(--f-display);font-weight:900;font-size:clamp(44px,5vw,76px);line-height:.9;letter-spacing:-.03em;color:var(--orange);font-variant-numeric:tabular-nums;white-space:nowrap}
+.n-unit{font-weight:900;font-size:clamp(15px,1.5vw,22px);line-height:1.1;white-space:nowrap}
+.n-unit:empty{display:none}
+.n-lab{font-weight:500;font-size:clamp(14px,1.15vw,17px);line-height:1.5;max-width:20em}
+@media (max-width:760px){
+  .nrow{grid-template-columns:minmax(0,1fr);gap:20px}
+  .nrow-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .n-val{font-size:14vw}
+}
+
+/* ---------- 6. timeline ---------- */
+.tl{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(24px,4vw,80px);align-items:start}
+.tl-side{position:sticky;top:calc(var(--top) + 96px);display:grid;gap:12px;justify-items:start}
+.tl-title{font-family:var(--f-display);font-size:clamp(72px,14.6vw,260px);line-height:.92;letter-spacing:-.02em;margin-left:-.05em}
+html[lang="en"] .tl-title{font-size:clamp(48px,7vw,128px);margin-left:-.03em}
+.tl-sub{background:var(--ink);color:var(--white);padding:.3em .7em}
+.tl-stickers{display:flex;align-items:center;gap:16px;margin-top:clamp(14px,2vw,30px)}
+.burst{position:relative;isolation:isolate;display:grid;place-items:center;width:clamp(112px,11vw,164px);aspect-ratio:1;text-align:center;transform:rotate(-8deg)}
+.burst::before{content:"";position:absolute;inset:0;z-index:-2;background:var(--ink);clip-path:var(--star16)}
+.burst::after{content:"";position:absolute;inset:6px;z-index:-1;background:var(--cobalt);clip-path:var(--star16)}
+.burst b,.dot b{font-family:var(--f-display);font-weight:900;font-size:clamp(15px,1.45vw,21px);line-height:1.1}
+.burst b{color:var(--white)}
+.dot{display:grid;place-items:center;width:clamp(100px,9.6vw,146px);aspect-ratio:1;border-radius:50%;background:var(--white);border:var(--bw) solid var(--ink);box-shadow:5px 5px 0 var(--ink);text-align:center;transform:rotate(8deg)}
+
+.tl-list{--x1:14px;--x2:46px;--lw:5px;--pl:82px;position:relative}
+.tl-item{position:relative;padding-left:var(--pl);padding-bottom:clamp(28px,3.4vw,50px)}
+.tl-seg{position:absolute;left:calc(var(--x1) - var(--lw) / 2);top:0;bottom:0;width:var(--lw);background:var(--ink);transform-origin:50% 0}
+.tl-item:first-child > .tl-seg{top:30px}
+.tl-school{padding-bottom:0}
+.tl-school > .tl-seg{bottom:auto;height:30px}
+.tl-node{position:absolute;left:calc(var(--x1) - 12px);top:18px;z-index:1;width:24px;height:24px;border-radius:50%;background:var(--white);border:var(--lw) solid var(--ink)}
+.tl-card{position:relative;display:grid;gap:6px;justify-items:start;background:var(--white);color:var(--ink);border:var(--bw) solid var(--ink);box-shadow:7px 7px 0 var(--ink);padding:clamp(16px,1.8vw,26px)}
+.tl-when{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:14px}
+.tl-card h3{font-size:clamp(20px,1.9vw,29px);line-height:1.3}
+.tl-note:empty{display:none}
+.tl-role{font-weight:500;line-height:1.55}
+.tl-what{font-size:15.5px;line-height:1.75}
+.tl-card .chips{margin-top:6px}
+.tl-items{display:grid;gap:5px;margin-top:4px}
+.tl-items li{position:relative;padding-left:1.2em;font-size:15.5px;line-height:1.6}
+.tl-items li::before{content:"";position:absolute;left:0;top:.74em;width:.56em;height:var(--bw);background:var(--ink)}
+
+.tl-cert .tl-card{max-width:470px;transform:rotate(-.8deg)}
+.tl-nchu .tl-card{max-width:700px;transform:rotate(.5deg)}
+.tl-hrs{background:var(--cobalt);color:var(--white);padding:0 .5em}
+.tl-cmp .tl-card{background:var(--ink);color:var(--white);box-shadow:10px 10px 0 var(--white);padding:clamp(22px,2.8vw,44px);gap:10px}
+.tl-cmp .tl-when{color:var(--orange);font-size:15px}
+.tl-cmp h3{font-size:clamp(26px,3vw,48px);line-height:1.2}
+.tl-cmp .tl-role{font-weight:900;font-size:clamp(19px,1.8vw,26px);color:var(--orange)}
+.tl-cmp .tl-what{font-size:17px}
+.tl-cmp .tl-node{width:32px;height:32px;left:calc(var(--x1) - 16px);top:26px;background:var(--orange)}
+.tl-go{margin-top:10px}
+.tl-item:nth-child(4) .tl-card{max-width:760px;transform:rotate(.4deg)}
+.tl-item:nth-child(5) .tl-card{max-width:680px;margin-left:5%;transform:rotate(-.5deg)}
+.tl-item:nth-child(6) .tl-card{max-width:720px;transform:rotate(.5deg)}
+.tl-school .tl-card{max-width:400px;background:var(--ink);color:var(--white);box-shadow:7px 7px 0 var(--white)}
+
+/* 2016–2020: two overlapping tracks. lane A (guesthouse) carries on down to school; lane B (short-term jobs) splits off and runs up to the next job. */
+.tl-fork{display:grid;gap:26px}
+.tl-fork .seg-stub{bottom:auto;height:26px}
+.tl-jog{position:absolute;left:calc(var(--x1) - var(--lw) / 2);width:calc(var(--x2) - var(--x1) + var(--lw));height:var(--lw);background:var(--ink);transform-origin:0 50%}
+.jog-top{top:calc(26px - var(--lw))}
+.jog-merge{top:80%;transform-origin:100% 50%}
+.tl-fork .lane-b{left:calc(var(--x2) - var(--lw) / 2);top:26px;bottom:20%}
+.tl-fork .lane-a{top:30%}
+.tl-cap{position:absolute;left:calc(var(--x1) - 11px);top:calc(30% - var(--lw));width:22px;height:var(--lw);background:var(--ink)}
+.tl-fork-label{margin-bottom:-4px}
+.tl-fork-label .tag{transform:rotate(-1.5deg)}
+.tl-lane{position:relative}
+.node-b{left:calc(var(--x2) - 12px - var(--pl))}
+.node-a{left:calc(var(--x1) - 12px - var(--pl));background:var(--ink)}
+.lane-card-b .tl-card{max-width:640px;transform:rotate(.5deg)}
+.lane-card-a .tl-card{max-width:520px;margin-left:8%;transform:rotate(-.7deg)}
+
+@media (max-width:860px){
+  .tl{grid-template-columns:minmax(0,1fr)}
+  .tl-side{position:static}
+  .tl-title{font-size:clamp(72px,26vw,170px)}
+  html[lang="en"] .tl-title{font-size:clamp(48px,16vw,110px)}
+  .tl-list{--x1:9px;--x2:31px;--pl:54px;margin-top:20px}
+  .tl-card{box-shadow:5px 5px 0 var(--ink)}
+  .tl-cmp .tl-card{box-shadow:6px 6px 0 var(--white)}
+  .tl-school .tl-card{box-shadow:5px 5px 0 var(--white)}
+  .tl-item:nth-child(5) .tl-card,.lane-card-a .tl-card{margin-left:0}
+}
+
+.tl-main{min-width:0}
+.tl-thread{font-weight:900;font-size:clamp(19px,2vw,31px);line-height:1.5;max-width:29em;margin-bottom:clamp(34px,4vw,60px)}
+html[lang="en"] .tl-thread{font-family:var(--f-display);line-height:1.25}
+.tl-hi{font-weight:900;font-size:clamp(17px,1.5vw,22px);line-height:1.35;background:var(--orange);color:var(--ink);padding:.15em .5em}
+
+/* ---------- 7a. five strengths ---------- */
+.sk-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px 24px;margin-bottom:clamp(26px,4vw,64px)}
+.sk-title{font-family:var(--f-display);font-size:clamp(56px,11.4vw,200px);line-height:.95;letter-spacing:-.02em;margin-left:-.04em}
+html[lang="en"] .sk-title{font-size:clamp(46px,9vw,160px);line-height:.9}
+.sk-list{border-bottom:var(--bw) solid var(--ink)}
+.sk{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(10px,4vw,76px);align-items:start;border-top:var(--bw) solid var(--ink);padding:clamp(20px,2.4vw,38px) clamp(0px,1.4vw,22px)}
+.sk::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--orange);transform:translateY(101%)}
+/* the orange panel follows the scroll: the row at reading height is lit (set by script, see js-2-anim) */
+.sk.is-on::before{transform:none}
+@media (prefers-reduced-motion:no-preference){.sk::before{transition:transform .38s var(--ease)}}
+/* without the scroll effect (no script, reduced motion) the AI row is simply the lit one */
+html:not(.sk-scroll) .sk-ai::before{transform:none}
+.sk h3{font-size:clamp(24px,3vw,50px);line-height:1.2}
+html[lang="en"] .sk h3{font-family:var(--f-display);line-height:1.05}
+.sk p{font-size:clamp(16px,1.25vw,18.5px);line-height:1.8}
+.sk-ai-body{display:grid;gap:14px}
+.sk-ai{padding-inline:clamp(12px,1.4vw,22px)}
+@media (max-width:760px){
+  .sk{grid-template-columns:minmax(0,1fr);gap:8px}
+}
+
+/* ---------- 7b. tools: a plain sorted list ---------- */
+.tools{padding-block:clamp(72px,9vw,140px)}
+.tools-title{font-family:var(--f-display);font-size:clamp(64px,12.6vw,220px);line-height:.92;letter-spacing:-.02em;color:var(--orange);margin-left:-.04em;margin-bottom:clamp(30px,4.4vw,64px)}
+.board{position:relative;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(30px,3.6vw,56px) clamp(20px,3vw,52px)}
+.tgroup{display:grid;gap:16px;align-content:start;min-width:0}
+.tgroup h3{display:flex;align-items:center;gap:.7em;color:var(--white)}
+.tgroup h3::before{content:"";flex:none;width:14px;height:14px;background:var(--c,var(--white));border:2px solid var(--white)}
+.tgroup ul{display:flex;flex-wrap:wrap;gap:14px 12px}
+.stk{font-family:var(--f-display);font-weight:900;font-size:clamp(19px,2.1vw,33px);line-height:1;white-space:nowrap;padding:.5em .7em .56em;border:var(--bw) solid var(--ink);background:var(--c,var(--white));color:var(--t,var(--ink))}
+.stk:nth-child(3n+1){transform:rotate(-3deg)}
+.stk:nth-child(3n+2){transform:rotate(2deg)}
+.stk:nth-child(3n){transform:rotate(-1deg)}
+.tg-1{grid-column:1 / span 7;--c:var(--orange)}
+.tg-2{grid-column:8 / span 5;--c:var(--white)}
+.tg-2 .stk{border-radius:999px;padding-inline:1em}
+.tg-3{grid-column:1 / span 6;--c:var(--cobalt);--t:var(--white)}
+.tg-4{grid-column:7 / span 6;--c:var(--ink);--t:var(--white)}
+.tg-4 .stk{border-color:var(--white)}
+.tg-5{grid-column:3 / span 8;--c:var(--white)}
+.tg-5 .stk{border-radius:50%;padding:.8em 1.1em .86em}
+@media (max-width:760px){
+  .board{grid-template-columns:minmax(0,1fr)}
+  .tgroup{grid-column:auto}
+  .tgroup ul{gap:11px 9px}
+}
+
+/* ---------- 8. contact ---------- */
+.contact{padding-top:clamp(72px,9vw,140px);padding-bottom:clamp(56px,7vw,110px)}
+.ct-big{font-family:var(--f-display);font-size:clamp(72px,21vw,420px);line-height:.94;letter-spacing:-.03em;white-space:nowrap;margin-left:-.05em;text-wrap:initial}
+.ct-big br{display:none}
+html[lang="en"] .ct-big{font-size:clamp(46px,13.4vw,260px);line-height:.9;margin-left:-.03em}
+html[lang="en"] .ct-big br{display:inline}
+.ct-sub{position:relative;z-index:2;width:max-content;max-width:100%;font-family:var(--f-display);font-weight:900;font-size:clamp(40px,7.4vw,140px);line-height:1;white-space:nowrap;color:var(--white);transform:rotate(-3deg);margin-top:-.16em;margin-left:auto;margin-right:3vw}
+.ct-sub:empty{display:none}
+.ct-row{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(26px,5vw,90px);align-items:end;margin-top:clamp(40px,5vw,84px)}
+.ct-left{display:grid;gap:22px;justify-items:start}
+.ct-closing{font-weight:900;font-size:clamp(24px,3vw,48px);line-height:1.35}
+html[lang="en"] .ct-closing{font-family:var(--f-display);line-height:1.1}
+.ct-stk{display:flex;flex-wrap:wrap;gap:14px 12px}
+.ct-stk .tag{font-size:14px}
+.ct-stk .tag:nth-child(2){transform:rotate(2deg);background:var(--ink);color:var(--white)}
+.ct-right{display:grid;gap:10px;min-width:0}
+.ct-mail{position:relative;display:flex;align-items:stretch}
+.ct-addr{flex:1 1 auto;min-width:0;display:flex;align-items:center;font-family:var(--f-mono);font-weight:500;font-size:clamp(15px,1.9vw,28px);line-height:1.3;background:var(--white);border:var(--bw) solid var(--ink);padding:.7em .8em;overflow-wrap:anywhere;-webkit-user-select:all;user-select:all}
+.ct-copy{flex:none;margin-left:calc(var(--bw) * -1);font-size:clamp(17px,1.6vw,24px);padding-inline:1.2em}
+.ct-toast{position:absolute;right:-10px;top:-30px;z-index:3;font-family:var(--f-mono);font-size:14px;font-weight:500;line-height:1.3;background:var(--cobalt);color:var(--white);border:var(--bw) solid var(--ink);box-shadow:4px 4px 0 var(--ink);padding:.5em .8em;transform:rotate(4deg) scale(0);transform-origin:80% 100%;opacity:0}
+.ct-toast.show{transform:rotate(4deg) scale(1);opacity:1}
+@media (prefers-reduced-motion:no-preference){.ct-toast{transition:transform .32s cubic-bezier(.3,1.6,.5,1),opacity .15s linear}}
+.ct-mail.is-copied .ct-addr{background:var(--ink);color:var(--white)}
+.ct-resume{margin-top:10px}
+.ct-resume .btn{font-size:clamp(16px,1.3vw,19px)}
+@media (max-width:760px){
+  .ct-big{font-size:22vw}
+  .ct-big br{display:inline}
+  html[lang="en"] .ct-big{font-size:14vw}
+  .ct-sub{margin-top:-.1em;margin-right:0;font-size:13vw}
+  .ct-row{grid-template-columns:minmax(0,1fr);align-items:start}
+  .ct-mail{flex-direction:column}
+  .ct-copy{margin-left:0;margin-top:calc(var(--bw) * -1);justify-content:center;font-size:19px}
+  .ct-addr{font-size:clamp(14px,4.3vw,18px)}
+  .ct-toast{right:0;top:-34px}
+  .ct-resume .btn{width:100%;justify-content:center}
+}
+
+.foot{padding:18px var(--gr) 20px var(--gl)}
+.foot p{font-size:12px;font-weight:400;letter-spacing:.03em}
+
+/* one-page résumé, opened inside the page */
+html:not(.js) [data-resume]{display:none}
+.rz{position:fixed;inset:0;z-index:140;display:flex;flex-direction:column;background:var(--ink);color:var(--white)}
+.rz-bar{flex:none;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px;padding:calc(var(--top) + 14px) var(--gr) 12px var(--gl);border-bottom:var(--bw) solid var(--white)}
+.rz-h{font-family:var(--f-display);font-size:clamp(20px,2.2vw,30px);line-height:1.1}
+.rz-actions{display:flex;flex-wrap:wrap;gap:8px}
+.rz-actions .btn{font-size:15px;padding:.7em 1em}
+.rz-scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;display:grid;justify-items:center;align-content:start;gap:14px;padding:clamp(16px,3vw,40px) var(--gr) 60px var(--gl)}
+.rz-note{width:100%;max-width:900px}
+.rz-img{width:100%;max-width:900px;height:auto;background:var(--white);border:var(--bw) solid var(--white)}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="meta.skip">跳到主要內容</a>
+<div class="progress" aria-hidden="true"><i></i></div>
+
+<nav class="nav" aria-label="主要導覽" data-i18n-attr="aria-label:meta.navLabel">
+  <ul class="nav-links" id="navlinks">
+    <li><a href="#work" data-i18n="nav.work">工作方式</a></li>
+    <li><a href="#ai" data-i18n="nav.ai">AI 實作</a></li>
+    <li><a href="#cmp" data-i18n="nav.cmp">勤美術館</a></li>
+    <li><a href="#timeline" data-i18n="nav.timeline">經歷</a></li>
+    <li><a href="#skills" data-i18n="nav.skills">能力</a></li>
+    <li><a href="#contact" data-i18n="nav.contact">聯絡</a></li>
+  </ul>
+  <button class="nav-menu" type="button" aria-expanded="false" aria-controls="navlinks" data-i18n="meta.menu">目錄</button>
+  <div class="lang" role="group" aria-label="語言切換" data-i18n-attr="aria-label:meta.lang">
+    <button type="button" class="lang-btn is-on" data-lang="zh" aria-pressed="true" lang="zh-Hant">中</button>
+    <button type="button" class="lang-btn" data-lang="en" aria-pressed="false" lang="en">EN</button>
+  </div>
+</nav>
+
+<header class="hero bg-o paper" id="top">
+  <div class="hero-grid">
+    <div class="hero-text">
+      <p class="hero-hello"><span class="tag" data-i18n="hero.hello">Hello，我是 Yui！</span></p>
+      <h1 class="sr-only" data-i18n="meta.name">莊馥瑀 Yui</h1>
+      <p class="name name-zh" aria-hidden="true" data-i18n="hero.nameZh" data-split="pop">莊馥瑀</p>
+      <div class="name-row">
+        <p class="name name-en" aria-hidden="true" data-i18n="hero.nameEn" data-split="pop">Yui</p>
+        <div class="hero-say">
+          <div class="hero-pos">
+            <p class="mono pos-l" data-i18n="hero.posL">定位</p>
+            <h2 class="pos"><span data-i18n="hero.pos1">專案管理</span><i aria-hidden="true">×</i><span data-i18n="hero.pos2">AI 應用規劃</span></h2>
+          </div>
+          <p class="hero-value" data-i18n="hero.value"><span class="nb">把模糊的想法與分歧的需求，</span><span class="nb">整合、轉換成做得出來的規格與交付成果。</span></p>
+        </div>
+      </div>
+      <div class="hero-cta">
+        <button type="button" class="btn btn-k" data-resume><span data-i18n="hero.resume">看一頁履歷</span></button>
+        <button type="button" class="btn" data-copy><span data-i18n="hero.copy">複製 Email</span></button>
+      </div>
+      <ul class="proofs">
+        <li><b data-i18n="hero.p1n">3 年</b><span data-i18n="hero.p1l">勤美集團專案執行</span></li>
+        <li><b data-i18n="hero.p2n">258 小時</b><span data-i18n="hero.p2l">AI 培訓＋2 個團隊專題</span></li>
+        <li><b data-i18n="hero.p3n">APMA</b><span data-i18n="hero.p3l">C 級一般專案經理證照</span></li>
+      </ul>
+    </div>
+
+    <div class="hero-photo" data-depth="1">
+      <figure class="frame photo-a">
+        <img src="img/photo-a.jpg" width="896" height="1195" alt="莊馥瑀 Yui 的個人照：白色上衣，站在灰色牆面前微笑" data-i18n-attr="alt:hero.photoAlt" decoding="async">
+      </figure>
+      <span class="tag hero-loc" data-i18n="hero.loc">台中・可遠端</span>
+      <div class="badge" data-depth="2.2">
+        <svg viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+          <circle class="badge-disc" cx="100" cy="100" r="96"/>
+          <path id="badge-ring" d="M100,100 m-73,0 a73,73 0 1,1 146,0 a73,73 0 1,1 -146,0" fill="none"/>
+          <text class="badge-t"><textPath href="#badge-ring" textLength="452" lengthAdjust="spacing" data-i18n="hero.badge">可立即上班 · OPEN TO WORK · 可立即上班 · OPEN TO WORK · </textPath></text>
+          <polygon class="badge-star" points="100,64 108.04,80.6 125.46,74.54 119.4,91.96 136,100 119.4,108.04 125.46,125.46 108.04,119.4 100,136 91.96,119.4 74.54,125.46 80.6,108.04 64,100 80.6,91.96 74.54,74.54 91.96,80.6"/>
+        </svg>
+        <span class="sr-only" data-i18n="hero.badgeSr">可立即上班 OPEN TO WORK</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-band">
+      <div class="marquee-run">
+        <ul class="marquee-track"><li data-i18n="hero.kw.0">以人為本</li><li data-i18n="hero.kw.1">追問根本</li><li data-i18n="hero.kw.2">結構化思考</li><li data-i18n="hero.kw.3">整合共識</li><li data-i18n="hero.kw.4">創意落地</li></ul>
+        <ul class="marquee-track"><li data-i18n="hero.kw.0">以人為本</li><li data-i18n="hero.kw.1">追問根本</li><li data-i18n="hero.kw.2">結構化思考</li><li data-i18n="hero.kw.3">整合共識</li><li data-i18n="hero.kw.4">創意落地</li></ul>
+        <ul class="marquee-track"><li data-i18n="hero.kw.0">以人為本</li><li data-i18n="hero.kw.1">追問根本</li><li data-i18n="hero.kw.2">結構化思考</li><li data-i18n="hero.kw.3">整合共識</li><li data-i18n="hero.kw.4">創意落地</li></ul>
+        <ul class="marquee-track"><li data-i18n="hero.kw.0">以人為本</li><li data-i18n="hero.kw.1">追問根本</li><li data-i18n="hero.kw.2">結構化思考</li><li data-i18n="hero.kw.3">整合共識</li><li data-i18n="hero.kw.4">創意落地</li></ul>
+        <ul class="marquee-track"><li data-i18n="hero.kw.0">以人為本</li><li data-i18n="hero.kw.1">追問根本</li><li data-i18n="hero.kw.2">結構化思考</li><li data-i18n="hero.kw.3">整合共識</li><li data-i18n="hero.kw.4">創意落地</li></ul>
+        <ul class="marquee-track"><li data-i18n="hero.kw.0">以人為本</li><li data-i18n="hero.kw.1">追問根本</li><li data-i18n="hero.kw.2">結構化思考</li><li data-i18n="hero.kw.3">整合共識</li><li data-i18n="hero.kw.4">創意落地</li></ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="beats" id="work" aria-labelledby="beats-h">
+  <h2 class="sr-only" id="beats-h" data-i18n="flow.sr">我的工作方式：座右銘三拍</h2>
+
+  <div class="beat beat-1 bg-w paper">
+    <p class="beat-meta mono"><b>1/3</b><span data-i18n="flow.t1">輸入</span></p>
+    <div class="stage s1" aria-hidden="true">
+      <i class="nt n1" data-i18n="flow.notes.0">決策者</i>
+      <i class="nt n2" data-i18n="flow.notes.1">設計</i>
+      <i class="nt n3" data-i18n="flow.notes.2">營運</i>
+      <i class="nt n4" data-i18n="flow.notes.3">工程</i>
+      <i class="nt n5" data-i18n="flow.notes.4">供應商</i>
+      <i class="nt n6" data-i18n="flow.notes.5">使用者</i>
+    </div>
+    <h3 class="beat-word" data-i18n="flow.s1" data-split="pop">先理解人</h3>
+    <p class="beat-cap" data-i18n="flow.c1">每個角色在意的事</p>
+  </div>
+
+  <div class="beat beat-2 bg-k paper">
+    <p class="beat-meta mono"><b>2/3</b><span data-i18n="flow.t2">整合</span></p>
+    <h3 class="beat-word" data-i18n="flow.s2" data-split="pop">再看懂問題</h3>
+    <div class="stage s2" aria-hidden="true">
+      <b class="goal" data-i18n="flow.goal">共同目標</b>
+      <i class="nt" data-i18n="flow.notes.0">決策者</i>
+      <i class="nt" data-i18n="flow.notes.1">設計</i>
+      <i class="nt" data-i18n="flow.notes.2">營運</i>
+      <i class="nt" data-i18n="flow.notes.3">工程</i>
+      <i class="nt" data-i18n="flow.notes.4">供應商</i>
+      <i class="nt" data-i18n="flow.notes.5">使用者</i>
+    </div>
+    <p class="beat-cap" data-i18n="flow.c2">共同目標與優先順序</p>
+  </div>
+
+  <div class="beat beat-3 bg-o paper">
+    <p class="beat-meta mono"><b>3/3</b><span data-i18n="flow.t3">轉換</span></p>
+    <h3 class="beat-word" data-i18n="flow.s3" data-split="pop">最後讓<br>好想法發生</h3>
+    <div class="stage s3" aria-hidden="true">
+      <i class="oc" data-i18n="flow.outs.0">規格</i>
+      <i class="oc" data-i18n="flow.outs.1">工作項目</i>
+      <i class="oc" data-i18n="flow.outs.2">交付標準</i>
+    </div>
+    <p class="beat-cap" data-i18n="flow.c3">做得出來的交付成果</p>
+  </div>
+  <div class="beat-hold" aria-hidden="true"></div>
+</section>
+
+<section class="work band bg-w paper" aria-labelledby="work-h">
+  <div class="work-top">
+    <div class="work-lead">
+      <h2 class="eyebrow" id="work-h" data-i18n="work.label">我的工作方式</h2>
+      <p class="work-self" data-i18n="work.self">我是莊馥瑀 Yui，對人的感受保持敏銳、喜歡追問根本，也享受將想法推進成成果的跨領域專案工作者。</p>
+    </div>
+    <ul class="kws" aria-label="五個關鍵字" data-i18n-attr="aria-label:work.kwLabel">
+      <li class="kw kw-1" data-i18n="hero.kw.0">以人為本</li>
+      <li class="kw kw-2" data-i18n="hero.kw.1">追問根本</li>
+      <li class="kw kw-3" data-i18n="hero.kw.2">結構化思考</li>
+      <li class="kw kw-4" data-i18n="hero.kw.3">整合共識</li>
+      <li class="kw kw-5" data-i18n="hero.kw.4">創意落地</li>
+    </ul>
+  </div>
+
+  <div class="ways">
+    <article class="way way-1">
+      <p class="mono way-t" data-i18n="work.c1t">思考方式</p>
+      <h3 data-i18n="work.c1h">從人的感受找到真正的問題</h3>
+      <p class="way-b" data-i18n="work.c1b">面對新領域，我先快速建立整體認知，再用架構整理資訊。比起立刻接受表面的答案，我更在意問題有沒有被正確理解。</p>
+    </article>
+    <article class="way way-2">
+      <p class="mono way-t" data-i18n="work.c2t">合作方式</p>
+      <h3 data-i18n="work.c2h">釐清問題，整合共識</h3>
+      <p class="way-b" data-i18n="work.c2b">討論停滯時，我先釐清問題、理解不同角色在意的事，再整理彼此觀點，找出兼顧目標與執行條件的共同方向。</p>
+    </article>
+    <article class="way way-3">
+      <p class="mono way-t" data-i18n="work.c3t">執行標準</p>
+      <h3 data-i18n="work.c3h">兼顧創意與品質</h3>
+      <p class="way-b" data-i18n="work.c3b">我主動整理內容邏輯與資訊層級，在創意、可行性與品質之間取得平衡，確保成果符合目標與交付要求。</p>
+    </article>
+    <article class="way way-4">
+      <p class="mono way-t" data-i18n="work.c4t">成長方式</p>
+      <h3 data-i18n="work.c4h">跨域探索，持續更新認知</h3>
+      <p class="way-b" data-i18n="work.c4b">進入新領域，我主動研究、參考實際案例、動手驗證，並用 AI 工具提升學習與分析的效率。</p>
+    </article>
+  </div>
+</section>
+
+<section class="ai band bg-k paper" id="ai" aria-labelledby="ai-h">
+  <div class="ai-head">
+    <h2 class="ai-title" id="ai-h" data-i18n="ai.title">AI 實作</h2>
+    <p class="ai-lead" data-i18n="ai.lead">258 小時的 AI 培訓、一張專案管理證照，和三個實作專案。</p>
+  </div>
+
+  <div class="creds">
+    <article class="cred cred-train">
+      <p class="mono cred-meta"><span data-i18n="ai.trainOrg">國立中興大學</span><span data-i18n="ai.trainWhen">2026/8–2026/10</span><b class="cred-hrs" data-i18n="ai.trainHrs">258 小時</b></p>
+      <h3 data-i18n="ai.trainName">服務業智慧營運與數據分析 AI 人才培訓專班</h3>
+      <ul class="chips">
+        <li data-i18n="ai.topics.0">AI 產業應用</li><li data-i18n="ai.topics.1">消費行為洞察</li><li data-i18n="ai.topics.2">服務流程自動化設計</li><li data-i18n="ai.topics.3">需求分析與流程設計</li><li data-i18n="ai.topics.4">資料視覺化</li><li data-i18n="ai.topics.5">AI Agent 與 Vibe Coding</li><li data-i18n="ai.topics.6">商業提案</li>
+      </ul>
+    </article>
+    <article class="cred cred-cert">
+      <p class="mono cred-meta"><span data-i18n="ai.certOrg">APMA 美國專案管理學會</span><span data-i18n="ai.certWhen">2026/9</span></p>
+      <p class="mono cred-note" data-i18n="ai.certNote"></p>
+      <h3 data-i18n="ai.certName"><span class="nb">C 級一般</span><span class="nb">專案經理</span><span class="nb">證照</span></h3>
+      <span class="burst cred-burst" aria-hidden="true"><b data-i18n="ai.certTag">APMA<br>證照</b></span>
+    </article>
+  </div>
+
+  <article class="case">
+    <header class="case-head">
+      <p class="mono case-meta"><span class="case-kicker" data-i18n="ai.caseL">團隊專題</span><span data-i18n="ai.c1.when">2026</span><span data-i18n="ai.c1.ctx">國立中興大學 AI 培訓團隊專題</span></p>
+      <h3 class="case-name" data-i18n="ai.c1.name">滑出趣</h3>
+      <p class="mono case-note" data-i18n="ai.c1.note"></p>
+      <p class="case-sub" data-i18n="ai.c1.sub">台中一日行程互動網站 MVP</p>
+      <ol class="strip">
+        <li data-i18n="ai.c1.a">團隊討論</li><li class="me" data-i18n="ai.c1.b">PRD</li><li data-i18n="ai.c1.c">可操作的網站 MVP</li>
+      </ol>
+    </header>
+    <dl class="case-body">
+      <div><dt class="mono" data-i18n="ai.fStart">起點</dt><dd data-i18n="ai.c1.start">從旅遊規劃的使用情境出發：一天的台中行程要怎麼排。</dd></div>
+      <div><dt class="mono" data-i18n="ai.fRole">我的角色</dt><dd class="strong" data-i18n="ai.c1.role">概念整合／PRD 撰寫／使用者流程與介面規劃</dd></div>
+      <div><dt class="mono" data-i18n="ai.fDid">我做的事</dt><dd><ul class="detail-list"><li data-i18n="ai.c1.did.0">參與使用者需求分析與功能範圍討論。</li><li data-i18n="ai.c1.did.1">把團隊討論統整成 PRD。</li><li data-i18n="ai.c1.did.2">參與 User Flow、網站介面與前端視覺規劃。</li></ul></dd></div>
+      <div><dt class="mono" data-i18n="ai.fTool">工具</dt><dd data-i18n="ai.c1.tool">ChatGPT、Codex：協助需求整理、規格文件與迭代。</dd></div>
+      <div><dt class="mono" data-i18n="ai.fOut">成果</dt><dd><p data-i18n="ai.c1.out">與團隊完成可操作的網站 MVP。</p>
+        <ul class="chips"><li data-i18n="ai.c1.feat.0">行程建立</li><li data-i18n="ai.c1.feat.1">時間軸</li><li data-i18n="ai.c1.feat.2">滑卡互動</li><li data-i18n="ai.c1.feat.3">公共服務地圖</li><li data-i18n="ai.c1.feat.4">靈感分類</li><li data-i18n="ai.c1.feat.5">會員偏好介面</li></ul>
+        <p class="case-link" data-link="huachuqu" hidden><a class="btn" target="_blank" rel="noopener noreferrer"><span data-i18n="ai.link">前往網站</span></a></p></dd></div>
+    </dl>
+  </article>
+
+  <div class="minis">
+    <article class="mini">
+      <p class="mono case-meta"><span class="case-kicker" data-i18n="ai.caseL">團隊專題</span><span data-i18n="ai.c1.when">2026</span><span data-i18n="ai.c1.ctx">國立中興大學 AI 培訓團隊專題</span></p>
+      <h3 class="mini-name" data-i18n="ai.m1.name">Foogle 找餐廳</h3>
+      <p class="mini-sub" data-i18n="ai.m1.sub">AI 餐廳探索網站原型</p>
+      <dl class="mini-body">
+        <div><dt class="mono" data-i18n="ai.fRole">我的角色</dt><dd class="strong" data-i18n="ai.m1.role">資料庫蒐集／使用體驗優化／推進團隊討論</dd></div>
+        <div><dt class="mono" data-i18n="ai.fTool">工具</dt><dd data-i18n="ai.m1.tool">Lovable：與團隊從需求做到網站原型。</dd></div>
+        <div><dt class="mono" data-i18n="ai.fFeat">功能</dt><dd><ul class="chips"><li data-i18n="ai.m1.feat.0">地圖</li><li data-i18n="ai.m1.feat.1">標籤篩選</li><li data-i18n="ai.m1.feat.2">AI 評論摘要</li><li data-i18n="ai.m1.feat.3">店家後台</li></ul></dd></div>
+      </dl>
+    </article>
+    <article class="mini">
+      <p class="mono case-meta"><span class="case-kicker" data-i18n="ai.m2.tag">個人專案</span><span data-i18n="ai.c1.when">2026</span></p>
+      <h3 class="mini-name" data-i18n="ai.m2.name">個人履歷網站</h3>
+      <p class="mini-sub" data-i18n="ai.m2.sub">中英雙語的互動式單頁網站，也就是您現在看到的這一頁。</p>
+      <dl class="mini-body">
+        <div><dt class="mono" data-i18n="ai.fRole">我的角色</dt><dd class="strong" data-i18n="ai.m2.role">需求規格撰寫／內容架構／視覺與動態方向／驗收與迭代</dd></div>
+        <div><dt class="mono" data-i18n="ai.fTool">工具</dt><dd data-i18n="ai.m2.tool">Claude：由我撰寫 prompt、協作完成。</dd></div>
+        <div><dt class="mono" data-i18n="ai.fOut">成果</dt><dd><ul class="chips"><li data-i18n="ai.m2.feat.0">中英切換</li><li data-i18n="ai.m2.feat.1">捲動動態</li><li data-i18n="ai.m2.feat.2">手機版面</li><li data-i18n="ai.m2.feat.3">一頁履歷 PDF</li></ul></dd></div>
+      </dl>
+    </article>
+  </div>
+</section>
+
+<section class="cmp" id="cmp" aria-labelledby="cmp-h">
+
+  <div class="cmp-intro band bg-o paper">
+    <p class="mono cmp-meta"><span data-i18n="cmp.label">專案底子｜代表專案</span><span data-i18n="cmp.when">2022/5–2025/4</span><span data-i18n="cmp.place">台中</span></p>
+    <h2 class="cmp-title" id="cmp-h" data-i18n="cmp.title">勤美術館</h2>
+    <div class="cmp-lead">
+      <figure class="cmp-b">
+        <div class="frame">
+          <img src="img/photo-b.webp" width="1170" height="702" alt="勤美術館建築外觀空拍，建築前方是一片草坡綠屋頂" data-i18n-attr="alt:cmp.altB" decoding="async">
+          <span class="curtain" aria-hidden="true"></span>
+        </div>
+        <figcaption class="mono cap" data-i18n="cmp.capB">勤美術館建築外觀，空拍。圖片來源：<a href="https://cmp-inspiration.org.tw/" target="_blank" rel="noopener noreferrer">勤美術館官網</a></figcaption>
+      </figure>
+      <div class="cmp-facts">
+        <dl>
+          <div><dt class="mono" data-i18n="cmp.roleL">我的角色</dt><dd class="cmp-role" data-i18n="cmp.role">專案執行</dd></div>
+          <div><dt class="mono" data-i18n="cmp.unitL">單位</dt><dd class="cmp-unit" data-i18n="cmp.unit">勤美股份有限公司 經營企劃室<br>勤美璞真文化藝術基金會（勤美術館）</dd></div>
+        </dl>
+        <p class="cmp-scope" data-i18n="cmp.scope">負責勤美術館前期品牌定位、品牌識別建置、公共家具與空間指標等專案；並參與勤美洲際酒店藝術品落地、基金會藝術教育活動。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cmp-did band bg-w paper">
+    <div class="did-head">
+      <h3 class="did-h" data-i18n="cmp.didH">我做了什麼</h3>
+      <p class="did-lead" data-i18n="cmp.didLead">需求整合、跨部門協調、供應商管理。這三件事，也是 AI 導入專案最需要的。</p>
+    </div>
+    <ol class="did-list">
+      <li class="did did-1">
+        <span class="did-n" aria-hidden="true">1</span>
+        <div><p class="mono did-t" data-i18n="cmp.d1t">商業洞察・提案</p><h4 data-i18n="cmp.d1h">前期策略與提案</h4><p class="did-b" data-i18n="cmp.d1b">做市場研究、競品分析與指標案例研究。獨立製作專案企劃與簡報，向決策者說明提案邏輯與執行方式。整理專案進度，參與每半年一次的董事會報告。</p></div>
+      </li>
+      <li class="did did-2">
+        <span class="did-n" aria-hidden="true">2</span>
+        <div><p class="mono did-t" data-i18n="cmp.d2t">需求整合・跨部門協調</p><h4 data-i18n="cmp.d2h">跨領域整合與落地</h4><p class="did-b" data-i18n="cmp.d2b">協調不同事業體、設計、營運、工程與外部合作單位。把各單位的需求轉成規格與交付標準，追蹤時程與待辦，驗收時確認成果品質與風險。擔任公共家具與空間指標專案窗口。</p></div>
+      </li>
+      <li class="did did-3">
+        <span class="did-n" aria-hidden="true">3</span>
+        <div><p class="mono did-t" data-i18n="cmp.d3t">供應商管理</p><h4 data-i18n="cmp.d3h">外部團隊與發包</h4><p class="did-b" data-i18n="cmp.d3b">參與設計團隊、藝術家、物料及製造供應商的開發、評選與溝通。整理發包需求、工作規範、報價與合作文件，追蹤供應商進度與產出品質。</p></div>
+      </li>
+    </ol>
+  </div>
+
+  <figure class="cband bg-w">
+    <div class="cband-view">
+      <div class="cband-plain"><img src="img/photo-c.webp" width="2000" height="1334" alt="勤美術館室內大廳，地面散置數件米白色石材座椅，畫面上有 MUSEUM OF NEXT 字樣" data-i18n-attr="alt:cmp.altC" decoding="async"></div>
+      <div class="cband-print" aria-hidden="true"><img src="img/photo-c.webp" width="2000" height="1334" alt="" decoding="async"></div>
+    </div>
+    <figcaption class="mono cap" data-i18n="cmp.capC">勤美術館室內一景。圖片來源：公共家具合作單位 <a href="https://www.googoodslife.com/field/cmp-inspiration-639n2" target="_blank" rel="noopener noreferrer">生活起物</a></figcaption>
+  </figure>
+
+  <div class="moment band bg-k paper">
+    <span class="moment-mark mark-a" aria-hidden="true"></span>
+    <span class="moment-mark mark-b" aria-hidden="true"></span>
+    <p class="mono moment-meta"><span data-i18n="cmp.momentL">關鍵時刻</span><span data-i18n="cmp.momentCtx">品牌識別專案</span></p>
+    <p class="moment-q" data-i18n="cmp.quote" data-split="fill">外部設計提案與決策者的期待有落差。<mark>我重新梳理品牌概念並提出方向</mark>，獲決策者採用後，再協調設計團隊深化執行。</p>
+  </div>
+
+  <div class="cmp-end band bg-o paper">
+    <figure class="cmp-d">
+      <div class="frame">
+        <img src="img/photo-d.jpg" width="1567" height="1045" alt="勤美術館開幕現場，一群人站在白色旋轉樓梯上，抬頭看向鏡頭合照" data-i18n-attr="alt:cmp.altD" decoding="async">
+      </div>
+      <figcaption class="mono cap" data-i18n="cmp.capD">勤美術館開幕。圖片來源：個人留存</figcaption>
+    </figure>
+    <div class="cmp-wrap">
+      <p class="wrap-t" data-i18n="cmp.wrap">三年，在勤美術館做品牌定位、識別建置、公共家具與空間指標。</p>
+      <p class="mono" data-i18n="cmp.alsoL">也參與</p>
+      <ul class="also">
+        <li class="tag" data-i18n="cmp.also1">勤美洲際酒店藝術品落地</li>
+        <li class="tag" data-i18n="cmp.also2">基金會藝術教育活動</li>
+      </ul>
+    </div>
+  </div>
+
+</section>
+
+<section class="nums band bg-k paper" aria-labelledby="nums-h">
+  <h2 class="sr-only" id="nums-h" data-i18n="num.sr">數字</h2>
+  <div class="nrows">
+    <div class="nrow">
+      <div class="nrow-h"><h3 data-i18n="num.g1">AI 培訓</h3><p class="mono nrow-s" data-i18n="num.g1s">國立中興大學 2026</p></div>
+      <ul class="nrow-list">
+        <li class="n n-wide"><p class="n-big"><span class="n-val"><span class="cnt" data-count="258">258</span></span><span class="n-unit" data-i18n="num.g1u1">小時</span></p><p class="n-lab" data-i18n="num.g1l1">服務業智慧營運與數據分析 AI 人才培訓專班</p></li>
+        <li class="n n-wide"><p class="n-big"><span class="n-val"><span class="cnt" data-count="2">2</span></span><span class="n-unit" data-i18n="num.g1u2">個</span></p><p class="n-lab" data-i18n="num.g1l2">團隊專題：滑出趣、Foogle 找餐廳</p></li>
+      </ul>
+    </div>
+    <div class="nrow">
+      <div class="nrow-h"><h3 data-i18n="num.g2">勤美集團</h3><p class="mono nrow-s" data-i18n="num.g2s">2022/5–2025/4</p><p class="mono nrow-note" data-i18n="num.g2note">依 2022/5–2025/3 的工作紀錄統計。</p></div>
+      <ul class="nrow-list">
+        <li class="n"><p class="n-big"><span class="n-val"><span class="cnt" data-count="3">3</span></span><span class="n-unit" data-i18n="num.g2u1">年</span></p><p class="n-lab" data-i18n="num.g2l1">專案執行</p></li>
+        <li class="n"><p class="n-big"><span class="n-val"><span class="cnt" data-count="10">10</span>+</span><span class="n-unit" data-i18n="num.g2u2">個</span></p><p class="n-lab" data-i18n="num.g2l2">子專案</p></li>
+        <li class="n"><p class="n-big"><span class="n-val"><span class="cnt" data-count="12">12</span>+</span><span class="n-unit" data-i18n="num.g2u3">個</span></p><p class="n-lab" data-i18n="num.g2l3">外部合作單位</p></li>
+        <li class="n"><p class="n-big"><span class="n-val"><span class="cnt" data-count="6">6</span></span><span class="n-unit" data-i18n="num.g2u4">次</span></p><p class="n-lab" data-i18n="num.g2l4">董事會報告</p></li>
+      </ul>
+    </div>
+    <div class="nrow">
+      <div class="nrow-h"><h3 data-i18n="num.g3">聖鑫生物科技</h3><p class="mono nrow-s" data-i18n="num.g3s">WOOMDOW 電商平台｜2021/5–2021/12</p><p class="mono nrow-note" data-i18n="num.g3note">部分廠商旗下有多個品牌，合計建立 40 個以上品牌的合作關係。</p></div>
+      <ul class="nrow-list">
+        <li class="n"><p class="n-big"><span class="n-val"><span class="cnt" data-count="28">28</span></span><span class="n-unit" data-i18n="num.g3u1">間</span></p><p class="n-lab" data-i18n="num.g3l1">廠商簽約</p></li>
+        <li class="n"><p class="n-big"><span class="n-val"><span class="cnt" data-count="300">300</span>+</span><span class="n-unit" data-i18n="num.g3u2">個</span></p><p class="n-lab" data-i18n="num.g3l2">SKU 上架</p></li>
+        <li class="n"><p class="n-big"><span class="n-val"><span class="cnt" data-count="90">90</span>%+</span><span class="n-unit" data-i18n="num.g3u3"></span></p><p class="n-lab" data-i18n="num.g3l3">廠商續約率</p></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="tl band bg-o paper" id="timeline" aria-labelledby="tl-h">
+  <div class="tl-side">
+    <h2 class="tl-title" id="tl-h" data-i18n="tl.title">經歷</h2>
+    <p class="mono tl-sub" data-i18n="tl.sub">由新到舊</p>
+    <div class="tl-stickers" aria-hidden="true">
+      <span class="burst"><b data-i18n="tl.st1">APMA<br>證照</b></span>
+      <span class="dot"><b data-i18n="tl.st2">258 hr<br>AI 培訓</b></span>
+    </div>
+  </div>
+
+  <div class="tl-main">
+    <p class="tl-thread" data-i18n="tl.thread">跨領域專案執行出身，正在往 AI 導入與軟體專案走。<br>我一直在找能整合人、流程與工具的位置，AI 導入正好是這三者的交集。</p>
+
+    <ol class="tl-list">
+      <li class="tl-item tl-cert">
+        <span class="tl-seg" aria-hidden="true"></span><span class="tl-node" aria-hidden="true"></span>
+        <article class="tl-card">
+          <p class="mono tl-when" data-i18n="tl.e1.when">2026/9</p>
+          <h3 data-i18n="tl.e1.org">APMA 美國專案管理學會</h3>
+          <p class="mono tl-note" data-i18n="tl.e1.note"></p>
+          <p class="tl-role" data-i18n="tl.e1.what">C 級一般專案經理證照</p>
+        </article>
+      </li>
+
+      <li class="tl-item tl-nchu">
+        <span class="tl-seg" aria-hidden="true"></span><span class="tl-node" aria-hidden="true"></span>
+        <article class="tl-card">
+          <p class="mono tl-when"><span data-i18n="tl.e2.when">2026/8–2026/10</span><b class="tl-hrs" data-i18n="tl.e2.hrs">258 小時</b></p>
+          <h3 data-i18n="tl.e2.org">國立中興大學</h3>
+          <p class="tl-role" data-i18n="tl.e2.what">服務業智慧營運與數據分析 AI 人才培訓專班</p>
+          <p class="tl-what" data-i18n="tl.e2.more">團隊專題：滑出趣、Foogle 找餐廳</p>
+        </article>
+      </li>
+
+      <li class="tl-item tl-cmp">
+        <span class="tl-seg" aria-hidden="true"></span><span class="tl-node" aria-hidden="true"></span>
+        <article class="tl-card">
+          <p class="mono tl-when"><span data-i18n="tl.e3.when">2022/5–2025/4</span><span data-i18n="tl.e3.place">台中</span></p>
+          <h3 data-i18n="tl.e3.org">勤美股份有限公司／<br>勤美璞真文化藝術基金會</h3>
+          <p class="tl-role" data-i18n="tl.e3.role">專案執行</p>
+          <p class="tl-what" data-i18n="tl.e3.what">勤美術館前期品牌定位、品牌識別建置、公共家具與空間指標等專案。</p>
+          <p class="tl-go"><a class="btn" href="#cmp"><span data-i18n="tl.e3.link">看勤美術館專題</span><span aria-hidden="true"> ↑</span></a></p>
+        </article>
+      </li>
+
+      <li class="tl-item">
+        <span class="tl-seg" aria-hidden="true"></span><span class="tl-node" aria-hidden="true"></span>
+        <article class="tl-card">
+          <p class="mono tl-when"><span data-i18n="tl.e4.when">2021/5–2021/12</span><span data-i18n="tl.e4.place">桃園</span></p>
+          <h3 data-i18n="tl.e4.org">聖鑫生物科技</h3>
+          <p class="mono tl-note" data-i18n="tl.e4.note">WOOMDOW 電商平台</p>
+          <p class="tl-role" data-i18n="tl.e4.role">商品開發企劃</p>
+          <p class="tl-hi" data-i18n="tl.e4.hi">8 個月簽下 28 間廠商</p>
+          <p class="tl-what" data-i18n="tl.e4.what">品牌與供應商開發、商品上架、廠商關係維護，並參與商品組合、定價策略與檔期活動。</p>
+        </article>
+      </li>
+
+      <li class="tl-item">
+        <span class="tl-seg" aria-hidden="true"></span><span class="tl-node" aria-hidden="true"></span>
+        <article class="tl-card">
+          <p class="mono tl-when"><span data-i18n="tl.e5.when">2020/10–2021/4</span><span data-i18n="tl.e5.place">桃園</span></p>
+          <h3 data-i18n="tl.e5.org">立侑螺絲工業</h3>
+          <p class="mono tl-note" data-i18n="tl.e5.note"></p>
+          <p class="tl-role" data-i18n="tl.e5.role">專案業務經理／採購／製程管理</p>
+          <p class="tl-what" data-i18n="tl.e5.what">客戶報價、訂單確認、採購協調、生產進度追蹤；處理不良品與交期延遲等異常。</p>
+        </article>
+      </li>
+
+      <li class="tl-item">
+        <span class="tl-seg" aria-hidden="true"></span><span class="tl-node" aria-hidden="true"></span>
+        <article class="tl-card">
+          <p class="mono tl-when"><span data-i18n="tl.e6.when">2020/3–2020/10</span><span data-i18n="tl.e6.place">桃園</span></p>
+          <h3 data-i18n="tl.e6.org">信義房屋</h3>
+          <p class="tl-role" data-i18n="tl.e6.role">不動產營業員</p>
+          <p class="tl-what" data-i18n="tl.e6.what">陌生開發、了解客戶需求、物件提案與帶看；達成轉正職業績並進入新人龍虎榜。</p>
+        </article>
+      </li>
+
+      <li class="tl-item tl-fork">
+        <span class="tl-seg seg-stub" aria-hidden="true"></span>
+        <span class="tl-jog jog-top" aria-hidden="true"></span>
+        <span class="tl-seg lane-b" aria-hidden="true"></span>
+        <span class="tl-cap" aria-hidden="true"></span>
+        <span class="tl-seg lane-a" aria-hidden="true"></span>
+        <span class="tl-jog jog-merge" aria-hidden="true"></span>
+        <p class="tl-fork-label"><span class="tag" data-i18n="tl.fork">2016–2020｜兩條線並行</span></p>
+        <div class="tl-lane lane-card-b">
+          <span class="tl-node node-b" aria-hidden="true"></span>
+          <article class="tl-card">
+            <p class="mono tl-when"><span data-i18n="tl.e7.when">2017/2–2020/2</span><span data-i18n="tl.e7.place">金門／台南／澳洲</span></p>
+            <h3 data-i18n="tl.e7.org">多元短期經歷</h3>
+            <ul class="tl-items">
+              <li data-i18n="tl.e7.items.0">金門國家公園古寧頭戰史館｜解說導覽員</li><li data-i18n="tl.e7.items.1">米羅兒童畫室｜美術老師</li><li data-i18n="tl.e7.items.2">果然滋味商行｜美編設計</li><li data-i18n="tl.e7.items.3">合盛大陸夜市｜招商專案</li><li data-i18n="tl.e7.items.4">澳洲墨爾本｜打工度假</li>
+            </ul>
+          </article>
+        </div>
+        <div class="tl-lane lane-card-a">
+          <span class="tl-node node-a" aria-hidden="true"></span>
+          <article class="tl-card">
+            <p class="mono tl-when"><span data-i18n="tl.e8.when">2016/6–2019/1</span><span data-i18n="tl.e8.place">金門</span></p>
+            <h3 data-i18n="tl.e8.org">金門小週末民宿</h3>
+            <p class="mono tl-note" data-i18n="tl.e8.note"></p>
+            <p class="tl-role" data-i18n="tl.e8.role">民宿負責人</p>
+            <p class="tl-hi" data-i18n="tl.e8.hi">從 0 到 1，再到轉售</p>
+            <ul class="tl-items">
+              <li data-i18n="tl.e8.pts.0">分析金門旅宿市場與競爭者，規劃品牌定位與差異化服務。</li><li data-i18n="tl.e8.pts.1">建立訂房、接待與日常管理流程，規劃房價、促銷、社群與廣告。</li><li data-i18n="tl.e8.pts.2">獨立完成品牌識別、行銷視覺、空間軟裝與陳列。</li>
+            </ul>
+          </article>
+        </div>
+      </li>
+
+      <li class="tl-item tl-school">
+        <span class="tl-seg" aria-hidden="true"></span><span class="tl-node" aria-hidden="true"></span>
+        <article class="tl-card">
+          <p class="mono tl-when" data-i18n="tl.e9.when">2012/9–2016/6</p>
+          <h3 data-i18n="tl.e9.org">大同大學</h3>
+          <p class="tl-role" data-i18n="tl.e9.what">工業設計系</p>
+        </article>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="skills band bg-w paper" id="skills" aria-labelledby="sk-h">
+  <div class="sk-head">
+    <h2 class="sk-title" id="sk-h" data-i18n="skills.title">五項專長</h2>
+    <p class="mono eyebrow" data-i18n="skills.label">能力與工具</p>
+  </div>
+  <ul class="sk-list">
+    <li class="sk"><h3 data-i18n="skills.s1h">專案規劃與執行</h3><p data-i18n="skills.s1b">釐清目標、範圍、限制與交付需求，追蹤時程、進度與品質。整合內外部資源與供應商，製作提案、進度報告與決策簡報。</p></li>
+    <li class="sk"><h3 data-i18n="skills.s2h">需求整合與跨團隊協作</h3><p data-i18n="skills.s2b">整理不同角色的需求與限制，找出共同目標與優先順序。把模糊或分歧的意見轉成清楚的方向、工作項目與交付標準。</p></li>
+    <li class="sk"><h3 data-i18n="skills.s3h">商業洞察與企劃提案</h3><p data-i18n="skills.s3b">做市場研究、競品分析與案例整理，把抽象概念轉成有說服力的企劃與簡報。</p></li>
+    <li class="sk"><h3 data-i18n="skills.s4h">設計思考與視覺溝通</h3><p data-i18n="skills.s4b">從人的感受與使用情境出發，把複雜資訊整理成清楚的架構。具備平面設計、影像處理、3D 建模與基礎工程製圖能力。</p></li>
+    <li class="sk sk-ai">
+      <h3 data-i18n="skills.s5h">AI 導入與應用規劃</h3>
+      <div class="sk-ai-body">
+        <p data-i18n="skills.s5b">盤點流程與痛點，評估生成式 AI 工具與自動化方案，規劃導入步驟。有美術教學與導覽解說經驗，能把 AI 工具的用法轉成好懂的教育訓練內容。</p>
+        <ul class="chips">
+          <li data-i18n="skills.s5c.0">Prompt 設計實務</li><li data-i18n="skills.s5c.1">服務流程自動化</li><li data-i18n="skills.s5c.2">AI Agent 應用</li><li data-i18n="skills.s5c.3">PRD 撰寫</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<section class="tools band bg-k paper" aria-labelledby="tools-h">
+  <h2 class="tools-title" id="tools-h" data-i18n="tools.title">工具</h2>
+  <div class="board">
+    <div class="tgroup tg-1">
+      <h3 class="mono" data-i18n="tools.c1">AI 與開發協作</h3>
+      <ul><li class="stk">Codex</li><li class="stk">ChatGPT</li><li class="stk">Claude</li><li class="stk">Gemini</li><li class="stk">Lovable</li><li class="stk">GitHub</li><li class="stk">VS Code</li></ul>
+    </div>
+    <div class="tgroup tg-2">
+      <h3 class="mono" data-i18n="tools.c2">專案與團隊協作</h3>
+      <ul><li class="stk">Miro</li><li class="stk">Slack</li><li class="stk">Google Workspace</li></ul>
+    </div>
+    <div class="tgroup tg-3">
+      <h3 class="mono" data-i18n="tools.c3">數據與簡報</h3>
+      <ul><li class="stk">Excel</li><li class="stk">Google Sheets</li><li class="stk">Power BI</li><li class="stk">PowerPoint</li><li class="stk">Keynote</li></ul>
+    </div>
+    <div class="tgroup tg-4">
+      <h3 class="mono" data-i18n="tools.c4">視覺與多媒體</h3>
+      <ul><li class="stk">Illustrator</li><li class="stk">Photoshop</li><li class="stk">Lightroom</li><li class="stk">CapCut</li></ul>
+    </div>
+    <div class="tgroup tg-5">
+      <h3 class="mono" data-i18n="tools.c5">3D 與工程製圖</h3>
+      <ul><li class="stk">Rhino</li><li class="stk">KeyShot</li><li class="stk">AutoCAD</li></ul>
+    </div>
+  </div>
+</section>
+
+<section class="contact band bg-o paper" id="contact" aria-labelledby="ct-h">
+  <h2 class="ct-big" id="ct-h" data-i18n="contact.big">開啟對話</h2>
+  <p class="ct-sub" aria-hidden="true" data-i18n="contact.sub">Let's talk</p>
+  <div class="ct-row">
+    <div class="ct-left">
+      <p class="ct-closing" data-i18n="contact.closing">期待有機會聊聊，謝謝您！</p>
+      <ul class="ct-stk">
+        <li class="tag" data-i18n="contact.st1">可立即上班</li>
+        <li class="tag" data-i18n="contact.st2">台中・可遠端</li>
+      </ul>
+    </div>
+    <div class="ct-right">
+      <p class="mono ct-mail-l" data-i18n="contact.emailL">Email</p>
+      <div class="ct-mail" id="ctMail">
+        <span class="ct-addr" id="email">&#115;&#97;&#108;&#101;&#105;&#115;&#104;&#97;&#120;&#112;&#101;&#99;&#105;&#97;&#108;&#53;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</span>
+        <button type="button" class="btn btn-k ct-copy" id="copyBtn" data-copy><span data-i18n="contact.copy">複製</span></button>
+        <span class="ct-toast" id="ctToast" role="status" aria-live="polite"></span>
+      </div>
+      <p class="ct-resume"><button type="button" class="btn" data-resume><span data-i18n="contact.resume">看一頁履歷</span></button></p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot bg-k">
+  <p class="mono" data-i18n="contact.footer">本站由我撰寫 prompt、與 Claude 協作完成。</p>
+</footer>
+
+<div class="rz" id="rz" role="dialog" aria-modal="true" aria-labelledby="rz-h" hidden>
+  <div class="rz-bar">
+    <h2 class="rz-h" id="rz-h" data-i18n="rz.title">一頁履歷</h2>
+    <div class="rz-actions">
+      <button type="button" class="btn" id="rzSave" hidden><span data-i18n="rz.save">下載 PDF</span></button>
+      <button type="button" class="btn" data-copy><span data-i18n="hero.copy">複製 Email</span></button>
+      <button type="button" class="btn" id="rzClose"><span data-i18n="rz.close">關閉</span></button>
+    </div>
+  </div>
+  <div class="rz-scroll">
+    <p class="mono rz-note" id="rzNote" data-i18n="rz.note">需要 PDF 檔，歡迎來信，我直接寄給您。</p>
+    <img class="rz-img" src="yui-resume.jpg" width="1600" height="2263" alt="莊馥瑀 Yui 的一頁履歷：定位、三個證據、經歷、AI 實作、證照與學歷、專長與工具，內容與本頁相同" data-i18n-attr="alt:rz.alt" loading="lazy" decoding="async">
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script id="i18n">
+/* ============================================================
+   文案字典：整站的字都在這裡。
+   - zh 是中文版，en 是英文版，兩邊的欄位要一一對應。
+   - 連結留空字串 "" 就不會顯示。
+   ============================================================ */
+window.SITE_LINKS = {
+  huachuqu: ""    // 滑出趣 網站連結
+};
+window.SITE_EMAIL = String.fromCharCode(115,97,108,101,105,115,104,97,120,112,101,99,105,97,108,53,64,103,109,97,105,108,46,99,111,109);
+window.SITE_RESUME = { file: "yui-resume.pdf", saveAs: "莊馥瑀_Yui_履歷.pdf" };
+
+window.I18N = {
+zh: {
+  meta: { skip: "跳到主要內容", navLabel: "主要導覽", lang: "語言切換", menu: "目錄", name: "莊馥瑀 Yui" },
+  nav: { work: "工作方式", ai: "AI 實作", cmp: "勤美術館", timeline: "經歷", skills: "能力", contact: "聯絡" },
+
+  hero: {
+    hello: "Hello，我是 Yui！",
+    nameZh: "莊馥瑀",
+    nameEn: "Yui",
+    posL: "定位",
+    pos1: "專案管理",
+    pos2: "AI 應用規劃",
+    value: "<span class=\"nb\">把模糊的想法與分歧的需求，</span><span class=\"nb\">整合、轉換成做得出來的規格與交付成果。</span>",
+    p1n: "3 年", p1l: "勤美集團專案執行",
+    p2n: "258 小時", p2l: "AI 培訓＋2 個團隊專題",
+    p3n: "APMA", p3l: "C 級一般專案經理證照",
+    resume: "看一頁履歷",
+    copy: "複製 Email", copied: "已複製",
+    loc: "台中・可遠端",
+    badge: "可立即上班 · OPEN TO WORK · 可立即上班 · OPEN TO WORK · ",
+    badgeSr: "可立即上班 OPEN TO WORK",
+    photoAlt: "莊馥瑀 Yui 的個人照：白色上衣，站在灰色牆面前微笑",
+    kw: ["以人為本", "追問根本", "結構化思考", "整合共識", "創意落地"]
+  },
+
+  flow: {
+    sr: "我的工作方式：座右銘三拍",
+    s1: "先理解人",
+    s2: "再看懂問題",
+    s3: "最後讓<br>好想法發生",
+    t1: "輸入", t2: "整合", t3: "轉換",
+    c1: "每個角色在意的事",
+    c2: "共同目標與優先順序",
+    c3: "做得出來的交付成果",
+    notes: ["決策者", "設計", "營運", "工程", "供應商", "使用者"],
+    goal: "共同目標",
+    outs: ["規格", "工作項目", "交付標準"],
+  },
+
+  work: {
+    label: "我的工作方式",
+    self: "我是莊馥瑀 Yui，對人的感受保持敏銳、喜歡追問根本，也享受將想法推進成成果的跨領域專案工作者。",
+    kwLabel: "五個關鍵字",
+    c1t: "思考方式", c1h: "從人的感受找到真正的問題",
+    c1b: "面對新領域，我先快速建立整體認知，再用架構整理資訊。比起立刻接受表面的答案，我更在意問題有沒有被正確理解。",
+    c2t: "合作方式", c2h: "釐清問題，整合共識",
+    c2b: "討論停滯時，我先釐清問題、理解不同角色在意的事，再整理彼此觀點，找出兼顧目標與執行條件的共同方向。",
+    c3t: "執行標準", c3h: "兼顧創意與品質",
+    c3b: "我主動整理內容邏輯與資訊層級，在創意、可行性與品質之間取得平衡，確保成果符合目標與交付要求。",
+    c4t: "成長方式", c4h: "跨域探索，持續更新認知",
+    c4b: "進入新領域，我主動研究、參考實際案例、動手驗證，並用 AI 工具提升學習與分析的效率。"
+  },
+
+  ai: {
+    title: "AI 實作",
+    lead: "258 小時的 AI 培訓、一張專案管理證照，和三個實作專案。",
+    trainName: "服務業智慧營運與數據分析 AI 人才培訓專班",
+    trainOrg: "國立中興大學", trainWhen: "2026/8–2026/10", trainHrs: "258 小時",
+    topics: ["AI 產業應用", "消費行為洞察", "服務流程自動化設計", "需求分析與流程設計", "資料視覺化", "AI Agent 與 Vibe Coding", "商業提案"],
+    certName: "<span class=\"nb\">C 級一般</span><span class=\"nb\">專案經理</span><span class=\"nb\">證照</span>",
+    certOrg: "APMA 美國專案管理學會", certNote: "", certWhen: "2026/9",
+    certTag: "APMA<br>證照",
+    caseL: "團隊專題",
+    fStart: "起點", fRole: "我的角色", fDid: "我做的事", fTool: "工具", fOut: "成果", fFeat: "功能",
+    link: "前往網站",
+    c1: {
+      name: "滑出趣", note: "",
+      sub: "台中一日行程互動網站 MVP",
+      when: "2026", ctx: "國立中興大學 AI 培訓團隊專題",
+      a: "團隊討論", b: "PRD", c: "可操作的網站 MVP",
+      start: "從旅遊規劃的使用情境出發：一天的台中行程要怎麼排。",
+      role: "概念整合／PRD 撰寫／使用者流程與介面規劃",
+      did: ["參與使用者需求分析與功能範圍討論。", "把團隊討論統整成 PRD。", "參與 User Flow、網站介面與前端視覺規劃。"],
+      tool: "ChatGPT、Codex：協助需求整理、規格文件與迭代。",
+      out: "與團隊完成可操作的網站 MVP。",
+      feat: ["行程建立", "時間軸", "滑卡互動", "公共服務地圖", "靈感分類", "會員偏好介面"]
+    },
+    m1: {
+      name: "Foogle 找餐廳", sub: "AI 餐廳探索網站原型",
+      role: "資料庫蒐集／使用體驗優化／推進團隊討論",
+      tool: "Lovable：與團隊從需求做到網站原型。",
+      feat: ["地圖", "標籤篩選", "AI 評論摘要", "店家後台"]
+    },
+    m2: {
+      tag: "個人專案", name: "個人履歷網站", sub: "中英雙語的互動式單頁網站，也就是您現在看到的這一頁。",
+      role: "需求規格撰寫／內容架構／視覺與動態方向／驗收與迭代",
+      tool: "Claude：由我撰寫 prompt、協作完成。",
+      feat: ["中英切換", "捲動動態", "手機版面", "一頁履歷 PDF"]
+    }
+  },
+
+  cmp: {
+    label: "專案底子｜代表專案",
+    title: "勤美術館",
+    when: "2022/5–2025/4",
+    place: "台中",
+    unitL: "單位",
+    unit: "勤美股份有限公司 經營企劃室<br>勤美璞真文化藝術基金會（勤美術館）",
+    roleL: "我的角色",
+    role: "專案執行",
+    scope: "負責勤美術館前期品牌定位、品牌識別建置、公共家具與空間指標等專案；並參與勤美洲際酒店藝術品落地、基金會藝術教育活動。",
+    altB: "勤美術館建築外觀空拍，建築前方是一片草坡綠屋頂",
+    capB: "勤美術館建築外觀，空拍。圖片來源：<a href=\"https://cmp-inspiration.org.tw/\" target=\"_blank\" rel=\"noopener noreferrer\">勤美術館官網</a>",
+    didH: "我做了什麼",
+    didLead: "需求整合、跨部門協調、供應商管理。這三件事，也是 AI 導入專案最需要的。",
+    d1t: "商業洞察・提案",
+    d1h: "前期策略與提案",
+    d1b: "做市場研究、競品分析與指標案例研究。獨立製作專案企劃與簡報，向決策者說明提案邏輯與執行方式。整理專案進度，參與每半年一次的董事會報告。",
+    d2t: "需求整合・跨部門協調",
+    d2h: "跨領域整合與落地",
+    d2b: "協調不同事業體、設計、營運、工程與外部合作單位。把各單位的需求轉成規格與交付標準，追蹤時程與待辦，驗收時確認成果品質與風險。擔任公共家具與空間指標專案窗口。",
+    d3t: "供應商管理",
+    d3h: "外部團隊與發包",
+    d3b: "參與設計團隊、藝術家、物料及製造供應商的開發、評選與溝通。整理發包需求、工作規範、報價與合作文件，追蹤供應商進度與產出品質。",
+    altC: "勤美術館室內大廳，地面散置數件米白色石材座椅，畫面上有 MUSEUM OF NEXT 字樣",
+    capC: "勤美術館室內一景。圖片來源：公共家具合作單位 <a href=\"https://www.googoodslife.com/field/cmp-inspiration-639n2\" target=\"_blank\" rel=\"noopener noreferrer\">生活起物</a>",
+    momentL: "關鍵時刻",
+    momentCtx: "品牌識別專案",
+    quote: "外部設計提案與決策者的期待有落差。<mark>我重新梳理品牌概念並提出方向</mark>，獲決策者採用後，再協調設計團隊深化執行。",
+    altD: "勤美術館開幕現場，一群人站在白色旋轉樓梯上，抬頭看向鏡頭合照",
+    capD: "勤美術館開幕。圖片來源：個人留存",
+    wrap: "三年，在勤美術館做品牌定位、識別建置、公共家具與空間指標。",
+    alsoL: "也參與",
+    also1: "勤美洲際酒店藝術品落地",
+    also2: "基金會藝術教育活動"
+  },
+
+  num: {
+    sr: "數字",
+    g1: "AI 培訓", g1s: "國立中興大學 2026",
+    g1u1: "小時", g1l1: "服務業智慧營運與數據分析 AI 人才培訓專班",
+    g1u2: "個", g1l2: "團隊專題：滑出趣、Foogle 找餐廳",
+    g2: "勤美集團", g2s: "2022/5–2025/4",
+    g2u1: "年", g2l1: "專案執行",
+    g2u2: "個", g2l2: "子專案",
+    g2u3: "個", g2l3: "外部合作單位",
+    g2u4: "次", g2l4: "董事會報告",
+    g2note: "依 2022/5–2025/3 的工作紀錄統計。",
+    g3: "聖鑫生物科技", g3s: "WOOMDOW 電商平台｜2021/5–2021/12",
+    g3u1: "間", g3l1: "廠商簽約",
+    g3u2: "個", g3l2: "SKU 上架",
+    g3u3: "", g3l3: "廠商續約率",
+    g3note: "部分廠商旗下有多個品牌，合計建立 40 個以上品牌的合作關係。"
+  },
+
+  tl: {
+    title: "經歷",
+    sub: "由新到舊",
+    thread: "跨領域專案執行出身，正在往 AI 導入與軟體專案走。<br>我一直在找能整合人、流程與工具的位置，AI 導入正好是這三者的交集。",
+    st1: "APMA<br>證照",
+    st2: "258 hr<br>AI 培訓",
+    fork: "2016–2020｜兩條線並行",
+    e1: { when: "2026/9", org: "APMA 美國專案管理學會", note: "", what: "C 級一般專案經理證照" },
+    e2: {
+      when: "2026/8–2026/10", org: "國立中興大學", hrs: "258 小時",
+      what: "服務業智慧營運與數據分析 AI 人才培訓專班",
+      more: "團隊專題：滑出趣、Foogle 找餐廳"
+    },
+    e3: {
+      when: "2022/5–2025/4", org: "勤美股份有限公司／<br>勤美璞真文化藝術基金會", role: "專案執行", place: "台中",
+      what: "勤美術館前期品牌定位、品牌識別建置、公共家具與空間指標等專案。",
+      link: "看勤美術館專題"
+    },
+    e4: {
+      when: "2021/5–2021/12", org: "聖鑫生物科技", note: "WOOMDOW 電商平台", role: "商品開發企劃", place: "桃園",
+      hi: "8 個月簽下 28 間廠商",
+      what: "品牌與供應商開發、商品上架、廠商關係維護，並參與商品組合、定價策略與檔期活動。"
+    },
+    e5: {
+      when: "2020/10–2021/4", org: "立侑螺絲工業", note: "", role: "專案業務經理／採購／製程管理", place: "桃園",
+      what: "客戶報價、訂單確認、採購協調、生產進度追蹤；處理不良品與交期延遲等異常。"
+    },
+    e6: {
+      when: "2020/3–2020/10", org: "信義房屋", role: "不動產營業員", place: "桃園",
+      what: "陌生開發、了解客戶需求、物件提案與帶看；達成轉正職業績並進入新人龍虎榜。"
+    },
+    e7: {
+      when: "2017/2–2020/2", org: "多元短期經歷", place: "金門／台南／澳洲",
+      items: [
+        "金門國家公園古寧頭戰史館｜解說導覽員",
+        "米羅兒童畫室｜美術老師",
+        "果然滋味商行｜美編設計",
+        "合盛大陸夜市｜招商專案",
+        "澳洲墨爾本｜打工度假"
+      ]
+    },
+    e8: {
+      when: "2016/6–2019/1", org: "金門小週末民宿", note: "", role: "民宿負責人", place: "金門",
+      hi: "從 0 到 1，再到轉售",
+      pts: [
+        "分析金門旅宿市場與競爭者，規劃品牌定位與差異化服務。",
+        "建立訂房、接待與日常管理流程，規劃房價、促銷、社群與廣告。",
+        "獨立完成品牌識別、行銷視覺、空間軟裝與陳列。"
+      ]
+    },
+    e9: { when: "2012/9–2016/6", org: "大同大學", what: "工業設計系" }
+  },
+
+  skills: {
+    label: "能力與工具",
+    title: "五項專長",
+    s1h: "專案規劃與執行",
+    s1b: "釐清目標、範圍、限制與交付需求，追蹤時程、進度與品質。整合內外部資源與供應商，製作提案、進度報告與決策簡報。",
+    s2h: "需求整合與跨團隊協作",
+    s2b: "整理不同角色的需求與限制，找出共同目標與優先順序。把模糊或分歧的意見轉成清楚的方向、工作項目與交付標準。",
+    s3h: "商業洞察與企劃提案",
+    s3b: "做市場研究、競品分析與案例整理，把抽象概念轉成有說服力的企劃與簡報。",
+    s4h: "設計思考與視覺溝通",
+    s4b: "從人的感受與使用情境出發，把複雜資訊整理成清楚的架構。具備平面設計、影像處理、3D 建模與基礎工程製圖能力。",
+    s5h: "AI 導入與應用規劃",
+    s5b: "盤點流程與痛點，評估生成式 AI 工具與自動化方案，規劃導入步驟。有美術教學與導覽解說經驗，能把 AI 工具的用法轉成好懂的教育訓練內容。",
+    s5c: ["Prompt 設計實務", "服務流程自動化", "AI Agent 應用", "PRD 撰寫"],
+  },
+
+  tools: {
+    title: "工具",
+    c1: "AI 與開發協作",
+    c2: "專案與團隊協作",
+    c3: "數據與簡報",
+    c4: "視覺與多媒體",
+    c5: "3D 與工程製圖"
+  },
+
+  contact: {
+    big: "開啟對話",
+    sub: "Let's talk",
+    closing: "期待有機會聊聊，謝謝您！",
+    emailL: "Email",
+    copy: "複製", copied: "已複製", manual: "已選取，請按 Ctrl 或 Cmd + C",
+    resume: "看一頁履歷",
+    st1: "可立即上班",
+    st2: "台中・可遠端",
+    footer: "本站由我撰寫 prompt、與 Claude 協作完成。"
+  },
+
+  rz: {
+    title: "一頁履歷",
+    save: "下載 PDF", saved: "已下載", failed: "這次沒有下載成功",
+    close: "關閉",
+    note: "需要 PDF 檔，歡迎來信，我直接寄給您。",
+    alt: "莊馥瑀 Yui 的一頁履歷：定位、三個證據、經歷、AI 實作、證照與學歷、專長與工具，內容與本頁相同"
+  }
+},
+
+en: {
+  meta: { skip: "Skip to content", navLabel: "Main navigation", lang: "Language", menu: "Menu", name: "Yui Chuang" },
+  nav: { work: "How I work", ai: "AI work", cmp: "CMP Inspiration", timeline: "Timeline", skills: "Skills", contact: "Contact" },
+
+  hero: {
+    hello: "Hello, I'm Yui!",
+    nameZh: "",
+    nameEn: "Yui <br>Chuang",
+    posL: "POSITIONING",
+    pos1: "Project Management",
+    pos2: "AI Application Planning",
+    value: "I take fuzzy ideas and conflicting needs, pull them together, and turn them into specs and deliverables that can be built.",
+    p1n: "3 years", p1l: "Project work at CMP Group",
+    p2n: "258 hours", p2l: "AI training + 2 team projects",
+    p3n: "APMA", p3l: "General Project Manager certificate, Level C",
+    resume: "One-page résumé",
+    copy: "Copy email", copied: "Copied",
+    loc: "Taichung · Remote OK",
+    badge: "OPEN TO WORK · AVAILABLE NOW · OPEN TO WORK · ",
+    badgeSr: "Open to work. Available now.",
+    photoAlt: "Portrait of Yui Chuang in a white shirt, smiling in front of a grey wall",
+    kw: ["People first", "Ask why", "Structured thinking", "Build consensus", "Make it real"]
+  },
+
+  flow: {
+    sr: "How I work: my motto in three beats",
+    s1: "Understand<br>people.",
+    s2: "See the real<br>problem.",
+    s3: "Make good<br>ideas happen.",
+    t1: "Input", t2: "Integrate", t3: "Convert",
+    c1: "What each role cares about",
+    c2: "Shared goals and priorities",
+    c3: "Deliverables a team can build",
+    notes: ["Decision makers", "Design", "Operations", "Engineering", "Suppliers", "Users"],
+    goal: "Shared goal",
+    outs: ["Specs", "Tasks", "Delivery standards"],
+  },
+
+  work: {
+    label: "How I work",
+    self: "I'm Yui. I pay attention to how people feel, I like to ask why, and I enjoy pushing ideas into real results. I work on projects across fields.",
+    kwLabel: "Five keywords",
+    c1t: "Thinking", c1h: "Start from how people feel to find the real problem",
+    c1b: "In a new field, I get the big picture fast, then sort what I learn into a structure. I care more about understanding the problem right than about taking the first answer.",
+    c2t: "Teamwork", c2h: "Clarify the problem, build consensus",
+    c2b: "When a discussion stalls, I clarify the problem and learn what each role cares about. Then I line up the views and find a direction that fits both the goal and the limits.",
+    c3t: "Standards", c3h: "Creative, and done right",
+    c3b: "I organize the logic and the levels of information myself. I balance creativity, feasibility, and quality, so the result meets the goal and the delivery requirements.",
+    c4t: "Growth", c4h: "Explore across fields, keep updating",
+    c4b: "In a new field, I do my own research, study real cases, and test things by hand. I use AI tools to learn and analyze faster."
+  },
+
+  ai: {
+    title: "AI, hands-on",
+    lead: "258 hours of AI training, a project management certificate, and three hands-on projects.",
+    trainName: "AI Talent Training Program: Smart Operations and Data Analytics for the Service Industry",
+    trainOrg: "National Chung Hsing University", trainWhen: "2026/8–2026/10", trainHrs: "258 hours",
+    topics: ["AI in industry", "Consumer behavior insights", "Service process automation design", "Requirements analysis and process design", "Data visualization", "AI agents and vibe coding", "Business proposals"],
+    certName: "General Project Manager certificate, Level C",
+    certOrg: "APMA", certNote: "An American project management association", certWhen: "2026/9",
+    certTag: "APMA<br>certified",
+    caseL: "Team project",
+    fStart: "Starting point", fRole: "My role", fDid: "What I did", fTool: "Tools", fOut: "Result", fFeat: "Features",
+    link: "Visit site",
+    c1: {
+      name: "Swipe for fun", note: "A one-day Taichung trip planner",
+      sub: "An interactive site for planning one day in Taichung (MVP)",
+      when: "2026", ctx: "Team project, NCHU AI training",
+      a: "Team discussions", b: "PRD", c: "A working site MVP",
+      start: "We started from how people plan a trip: how to lay out one day in Taichung.",
+      role: "Concept / PRD writing / User flow and UI planning",
+      did: ["Took part in user needs analysis and scope discussions.", "Turned the team's discussions into a PRD.", "Took part in planning the user flow, the site UI, and the front-end visuals."],
+      tool: "ChatGPT and Codex, for requirements, spec docs, and iterations.",
+      out: "A working site MVP, built with the team.",
+      feat: ["Trip builder", "Timeline", "Swipe cards", "Public services map", "Inspiration categories", "Member preferences"]
+    },
+    m1: {
+      name: "Foogle", sub: "A prototype of an AI restaurant-finder website",
+      role: "Database collection / UX improvement / keeping team discussions moving",
+      tool: "Lovable: with the team, from requirements to a website prototype.",
+      feat: ["Map", "Tag filters", "AI review summaries", "Restaurant admin panel"]
+    },
+    m2: {
+      tag: "Personal project", name: "Personal résumé site", sub: "A bilingual, interactive one-page site. It is the page you are looking at.",
+      role: "Requirements and spec writing / content structure / visual and motion direction / review and iteration",
+      tool: "Claude: I wrote the prompts and we built it together.",
+      feat: ["Language switch", "Scroll-driven motion", "Phone layout", "One-page résumé PDF"]
+    }
+  },
+
+  cmp: {
+    label: "Project foundation · Featured project",
+    title: "CMP<br>Inspiration",
+    when: "2022/5–2025/4",
+    place: "Taichung",
+    unitL: "Where",
+    unit: "CMP Group, Business Planning Office<br>CMP PUJEN Foundation for Arts and Culture (CMP Inspiration)",
+    roleL: "My role",
+    role: "Project Executive",
+    scope: "I handled the early brand positioning, the brand identity build, and the public furniture and wayfinding projects for CMP Inspiration. I also took part in the artwork installation at InterContinental Taichung and the foundation's art education events.",
+    altB: "Aerial view of the CMP Inspiration building, with a grass-covered sloping roof in front",
+    capB: "CMP Inspiration, exterior from above. Photo: <a href=\"https://cmp-inspiration.org.tw/\" target=\"_blank\" rel=\"noopener noreferrer\">CMP Inspiration website</a>",
+    didH: "What I did",
+    didLead: "Requirements integration, cross-team coordination, supplier management. These three are also what an AI adoption project needs most.",
+    d1t: "Insight · Proposals",
+    d1h: "Early strategy and proposals",
+    d1b: "Market research, competitor analysis, and benchmark case studies. I made project plans and decks on my own and explained the logic and the plan to decision makers. I kept track of progress and took part in the board report every six months.",
+    d2t: "Requirements · Cross-team",
+    d2h: "Cross-team work and delivery",
+    d2b: "I coordinated business units, design, operations, engineering, and outside partners. I turned each team's needs into specs and delivery standards, tracked schedules and to-dos, and checked quality and risks at acceptance. I was the contact person for the public furniture and wayfinding projects.",
+    d3t: "Supplier management",
+    d3h: "Outside teams and contracting",
+    d3b: "I took part in finding, selecting, and working with design teams, artists, and material and manufacturing suppliers. I prepared contracting requirements, work specs, quotes, and agreements, and tracked supplier progress and output quality.",
+    altC: "The lobby of CMP Inspiration, with several off-white stone seats on the floor and the words MUSEUM OF NEXT across the image",
+    capC: "Inside CMP Inspiration. Photo: <a href=\"https://www.googoodslife.com/field/cmp-inspiration-639n2\" target=\"_blank\" rel=\"noopener noreferrer\">googoods design</a>, the partner for the public furniture",
+    momentL: "Key moment",
+    momentCtx: "Brand identity project",
+    quote: "The outside design proposal didn't match what the decision makers expected. <mark>I reworked the brand concept and proposed a direction.</mark> They adopted it, and then I worked with the design team to develop it.",
+    altD: "A group of people standing on a white spiral staircase at the opening of CMP Inspiration, looking up at the camera",
+    capD: "The opening of CMP Inspiration. Photo: personal collection",
+    wrap: "Three years at CMP Inspiration: brand positioning, identity, public furniture, and wayfinding.",
+    alsoL: "Also took part in",
+    also1: "Artwork installation at InterContinental Taichung",
+    also2: "The foundation's art education events"
+  },
+
+  num: {
+    sr: "In numbers",
+    g1: "AI training", g1s: "National Chung Hsing University, 2026",
+    g1u1: "hours", g1l1: "AI Talent Training Program: Smart Operations and Data Analytics for the Service Industry",
+    g1u2: "", g1l2: "team projects: Swipe for fun and Foogle",
+    g2: "CMP Group", g2s: "2022/5–2025/4",
+    g2u1: "years", g2l1: "of project work",
+    g2u2: "", g2l2: "sub-projects",
+    g2u3: "", g2l3: "outside partners",
+    g2u4: "", g2l4: "board reports",
+    g2note: "Counted from my work log, 2022/5–2025/3.",
+    g3: "Sensuous Biotech Co., Ltd.", g3s: "WOOMDOW e-commerce platform · 2021/5–2021/12",
+    g3u1: "vendors", g3l1: "signed",
+    g3u2: "", g3l2: "SKUs listed",
+    g3u3: "", g3l3: "vendor renewal rate",
+    g3note: "Some vendors own several brands, so the partnerships cover 40+ brands in total."
+  },
+
+  tl: {
+    title: "Timeline",
+    sub: "Newest first",
+    thread: "I come from hands-on project work across fields. Now I'm moving into AI adoption and software projects.<br>I have always looked for a place where people, process, and tools come together. AI adoption sits right where the three meet.",
+    st1: "APMA<br>certified",
+    st2: "258 hr<br>AI training",
+    fork: "2016–2020 · Two tracks in parallel",
+    e1: { when: "2026/9", org: "APMA", note: "An American project management association", what: "General Project Manager certificate, Level C" },
+    e2: {
+      when: "2026/8–2026/10", org: "National Chung Hsing University", hrs: "258 hours",
+      what: "AI Talent Training Program: Smart Operations and Data Analytics for the Service Industry",
+      more: "Team projects: Swipe for fun and Foogle"
+    },
+    e3: {
+      when: "2022/5–2025/4", org: "CMP Group /<br>CMP PUJEN Foundation for Arts and Culture", role: "Project Executive", place: "Taichung",
+      what: "Early brand positioning, brand identity build, and the public furniture and wayfinding projects for CMP Inspiration.",
+      link: "See the CMP Inspiration story"
+    },
+    e4: {
+      when: "2021/5–2021/12", org: "Sensuous Biotech Co., Ltd.", note: "Runs the WOOMDOW e-commerce platform", role: "Product Development Planner", place: "Taoyuan",
+      hi: "28 vendors signed in 8 months",
+      what: "Brand and supplier development, product listing, and vendor relations. Also took part in product mix, pricing, and seasonal campaigns."
+    },
+    e5: {
+      when: "2020/10–2021/4", org: "Liyou Screw Industry Co., Ltd.", note: "", role: "Project Sales Manager / Purchasing / Process Management", place: "Taoyuan",
+      what: "Customer quotes, order confirmation, purchasing coordination, and production tracking. Handled problems such as defects and late deliveries."
+    },
+    e6: {
+      when: "2020/3–2020/10", org: "Sinyi Realty", role: "Real Estate Agent", place: "Taoyuan",
+      what: "Cold outreach, learning what clients need, proposing and showing properties. Reached the sales target for a full-time position and made the top newcomers list."
+    },
+    e7: {
+      when: "2017/2–2020/2", org: "Various short-term jobs", place: "Kinmen / Tainan / Australia",
+      items: [
+        "Guningtou Battle Museum, Kinmen National Park · Tour guide",
+        "Miro Children's Art Studio · Art teacher",
+        "GO FRUIT CO. · Graphic designer",
+        "Hesheng Mainland Night Market · Vendor recruitment project",
+        "Melbourne, Australia · Working holiday"
+      ]
+    },
+    e8: {
+      when: "2016/6–2019/1", org: "Little Weekend Inn", note: "", role: "Guesthouse owner and manager", place: "Kinmen",
+      hi: "From zero to one, then sold",
+      pts: [
+        "Studied the Kinmen lodging market and competitors. Planned the brand positioning and what made the service different.",
+        "Set up booking, check-in, and daily management routines. Planned room rates, promotions, social media, and ads.",
+        "Did the brand identity, marketing visuals, interior styling, and displays on my own."
+      ]
+    },
+    e9: { when: "2012/9–2016/6", org: "Tatung University", what: "Industrial Design" }
+  },
+
+  skills: {
+    label: "Skills & tools",
+    title: "Five strengths",
+    s1h: "Project planning and delivery",
+    s1b: "I clarify goals, scope, limits, and deliverables, and track schedule, progress, and quality. I bring internal teams and suppliers together, and make proposals, progress reports, and decision decks.",
+    s2h: "Requirements and cross-team work",
+    s2b: "I sort out what each role needs and what limits it has, then find shared goals and priorities. I turn vague or conflicting opinions into a clear direction, tasks, and delivery standards.",
+    s3h: "Business insight and proposals",
+    s3b: "Market research, competitor analysis, and case studies. I turn abstract ideas into plans and decks that persuade.",
+    s4h: "Design thinking and visual communication",
+    s4b: "I start from how people feel and how they use things, and organize complex information into a clear structure. I can do graphic design, image editing, 3D modeling, and basic engineering drawings.",
+    s5h: "AI adoption and application planning",
+    s5b: "I map workflows and pain points, assess generative AI tools and automation options, and plan the rollout steps. I have taught art and guided museum visitors, so I can turn AI tools into training that is easy to follow.",
+    s5c: ["Prompt design practice", "Service process automation", "AI agent applications", "PRD writing"],
+  },
+
+  tools: {
+    title: "Tools",
+    c1: "AI and dev collaboration",
+    c2: "Project and team collaboration",
+    c3: "Data and slides",
+    c4: "Visual and media",
+    c5: "3D and engineering drawing"
+  },
+
+  contact: {
+    big: "Start a<br>conversation",
+    sub: "",
+    closing: "I'd love to talk. Thank you!",
+    emailL: "Email",
+    copy: "Copy", copied: "Copied", manual: "Selected. Press Ctrl or Cmd + C.",
+    resume: "One-page résumé",
+    st1: "Available now",
+    st2: "Taichung · Remote OK",
+    footer: "I wrote the prompts for this site and built it together with Claude."
+  },
+
+  rz: {
+    title: "One-page résumé (Chinese)",
+    save: "Download PDF", saved: "Saved", failed: "The download didn't go through",
+    close: "Close",
+    note: "Need the PDF? Email me and I'll send it over.",
+    alt: "Yui's one-page résumé in Chinese: positioning, three proof points, experience, AI work, certificate and education, strengths and tools. Same content as this page."
+  }
+}
+};
+
+</script>
+<script>
+(function () {
+'use strict';
+
+var D = window.I18N || { zh: {}, en: {} };
+var LINKS = window.SITE_LINKS || {}, EMAIL = window.SITE_EMAIL || '', RES = window.SITE_RESUME || {};
+var root = document.documentElement;
+var $ = function (s, c) { return (c || document).querySelector(s); };
+var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+var mm = function (q) { try { return window.matchMedia(q).matches; } catch (e) { return false; } };
+var RM = mm('(prefers-reduced-motion: reduce)');
+var G = window.gsap, ST = window.ScrollTrigger;
+var ANIM = !!(G && ST) && !RM;          // motion is an extra layer: without it the page is already complete
+var lang = 'zh';
+var hooks = [];                          // re-run after every language change
+
+root.classList.add('js');
+root.lang = 'zh-Hant';
+if (ANIM) { G.registerPlugin(ST); ST.config({ ignoreMobileResize: true }); root.classList.add('anim'); }
+else { root.classList.remove('intro-pending'); }
+
+/* ---------- dictionary ---------- */
+function t(key, l) {
+  var o = D[l || lang], p = key.split('.');
+  for (var i = 0; i < p.length; i++) { if (o == null) return undefined; o = o[p[i]]; }
+  return o;
+}
+function plainText(el) {
+  var c = el.cloneNode(true);
+  $$('br', c).forEach(function (b) { b.parentNode.replaceChild(document.createTextNode(' '), b); });
+  return c.textContent.replace(/\s+/g, ' ').trim();
+}
+/* wrap every character in a span (keeps <br> and <mark>); screen readers get one plain copy */
+function split(el) {
+  var plain = plainText(el);
+  var wrap = document.createElement('span');
+  wrap.className = 'split';
+  wrap.setAttribute('aria-hidden', 'true');
+  (function walk(src, dst) {
+    Array.prototype.slice.call(src.childNodes).forEach(function (n) {
+      if (n.nodeType === 3) {
+        Array.from(n.nodeValue).forEach(function (ch) {
+          if (/\s/.test(ch)) { dst.appendChild(document.createTextNode(ch)); return; }
+          var s = document.createElement('span');
+          s.className = 'ch';
+          s.textContent = ch;
+          dst.appendChild(s);
+        });
+      } else if (n.nodeType === 1) {
+        var c = n.cloneNode(false);
+        dst.appendChild(c);
+        walk(n, c);
+      }
+    });
+  })(el, wrap);
+  el.textContent = '';
+  if (plain && el.getAttribute('aria-hidden') !== 'true') {
+    var sr = document.createElement('span');
+    sr.className = 'sr-only';
+    sr.textContent = plain;
+    el.appendChild(sr);
+  }
+  el.appendChild(wrap);
+}
+function applyText(l) {
+  lang = l;
+  root.lang = l === 'zh' ? 'zh-Hant' : 'en';
+  $$('[data-i18n]').forEach(function (el) {
+    var v = t(el.getAttribute('data-i18n'));
+    if (typeof v !== 'string') return;
+    el.innerHTML = v;
+    if (el.hasAttribute('data-split')) split(el);
+  });
+  $$('[data-i18n-attr]').forEach(function (el) {
+    el.getAttribute('data-i18n-attr').split(';').forEach(function (pair) {
+      var a = pair.split(':'), v = t(a[1].trim());
+      if (typeof v === 'string') el.setAttribute(a[0].trim(), v);
+    });
+  });
+  $$('.lang-btn').forEach(function (b) {
+    var on = b.getAttribute('data-lang') === l;
+    b.classList.toggle('is-on', on);
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+  });
+}
+var switching = false;
+function setLang(l) {
+  if (l === lang || switching) return;
+  var finish = function () { applyText(l); hooks.forEach(function (f) { f(); }); };
+  if (!ANIM) { finish(); return; }
+  var vh = window.innerHeight;
+  var vis = $$('[data-i18n]').filter(function (el) {
+    if (!el.style || el.closest('[hidden]') || el.closest('svg') || el.closest('.stage')) return false;
+    var r = el.getBoundingClientRect();
+    return r.width > 0 && r.bottom > -40 && r.top < vh + 40;
+  });
+  if (!vis.length) { finish(); return; }
+  switching = true;
+  setTimeout(function () { switching = false; }, 1500);   // never leave the toggle locked
+  /* flip out, swap the words, flip back in */
+  G.to(vis, {
+    opacity: 0, yPercent: -40, rotationX: -75, transformPerspective: 500, duration: .2, ease: 'power2.in', stagger: { amount: .1 }, overwrite: 'auto',
+    onComplete: function () {
+      finish();
+      G.fromTo(vis, { opacity: 0, yPercent: 40, rotationX: 75, transformPerspective: 500 },
+        { opacity: 1, yPercent: 0, rotationX: 0, duration: .4, ease: 'back.out(1.6)', stagger: { amount: .14 }, clearProps: 'opacity,transform', overwrite: 'auto',
+          onComplete: function () { switching = false; } });
+    }
+  });
+}
+
+var addr = $('#email');
+if (EMAIL) addr.textContent = EMAIL;
+applyText('zh');
+$$('[data-split]:not([data-i18n])').forEach(split);
+$$('.lang-btn').forEach(function (b) { b.addEventListener('click', function () { setLang(b.getAttribute('data-lang')); }); });
+
+/* ---------- optional project links: shown only when filled in ---------- */
+$$('[data-link]').forEach(function (el) {
+  var url = LINKS[el.getAttribute('data-link')];
+  if (!url) return;
+  $('a', el).setAttribute('href', url);
+  el.hidden = false;
+});
+
+/* ---------- nav ---------- */
+var nav = $('.nav'), menuBtn = $('.nav-menu');
+function closeMenu() { nav.classList.remove('is-open'); menuBtn.setAttribute('aria-expanded', 'false'); }
+menuBtn.addEventListener('click', function () {
+  var open = !nav.classList.contains('is-open');
+  nav.classList.toggle('is-open', open);
+  menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
+$$('a[href^="#"]').forEach(function (a) {
+  a.addEventListener('click', function (e) {
+    var target = document.getElementById(a.getAttribute('href').slice(1));
+    if (!target) return;
+    e.preventDefault();
+    closeMenu();
+    window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset, behavior: RM ? 'auto' : 'smooth' });
+    if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+    target.focus({ preventScroll: true });
+  });
+});
+
+/* ---------- reading progress ---------- */
+var bar = $('.progress i');
+function prog() {
+  var h = root.scrollHeight - window.innerHeight;
+  var p = h > 0 ? Math.min(1, Math.max(0, window.pageYOffset / h)) : 0;
+  bar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
+}
+window.addEventListener('scroll', prog, { passive: true });
+window.addEventListener('resize', prog);
+prog();
+
+/* a button label that changes for a moment, then goes back to its dictionary text */
+function flashLabel(btn, text, ms) {
+  var label = $('span', btn), key = label.getAttribute('data-i18n');
+  label.textContent = text;
+  clearTimeout(btn._t);
+  btn._t = setTimeout(function () { label.textContent = t(key); }, ms);
+}
+
+/* ---------- copy email (hero button and contact button) ---------- */
+var toast = $('#ctToast'), ctMail = $('#ctMail');
+function selectAddr() {
+  try { var r = document.createRange(); r.selectNodeContents(addr); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); } catch (e) {}
+}
+function copyEmail(btn) {
+  var text = addr.textContent.trim(), inContact = !!btn.closest('.contact');
+  var done = function (ok) {
+    if (!inContact) { flashLabel(btn, ok ? t('hero.copied') : text, ok ? 2200 : 7000); return; }   // if copying is refused, show the address itself
+    if (ok) flashLabel(btn, t('contact.copied'), 2400); else selectAddr();
+    toast.textContent = t(ok ? 'contact.copied' : 'contact.manual');
+    toast.classList.add('show');
+    ctMail.classList.toggle('is-copied', ok);
+    if (ok && ANIM) G.fromTo(ctMail, { x: -8 }, { x: 0, duration: .6, ease: 'elastic.out(1.2,.3)' });
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function () { toast.classList.remove('show'); ctMail.classList.remove('is-copied'); }, 2400);
+  };
+  try { navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); }); }
+  catch (e) { done(false); }
+}
+$$('[data-copy]').forEach(function (b) { b.addEventListener('click', function () { copyEmail(b); }); });
+
+/* ---------- one-page résumé: opens inside the page for everyone; a PDF button appears where the file can be saved ---------- */
+var rz = $('#rz'), rzSave = $('#rzSave'), rzNote = $('#rzNote'), rzClose = $('#rzClose'), rzFrom = null, saver = null;
+/* On an ordinary web host (no Artifact runtime) the PDF is simply downloaded through a link. */
+var direct = !(window.claude && typeof window.claude.use === 'function');
+function rzState() { rzSave.hidden = !(saver || direct); rzNote.hidden = !!(saver || direct); }
+try {
+  if (window.claude && typeof window.claude.use === 'function') {
+    window.claude.use('downloads').then(function (d) { saver = d; rzState(); }, function () {});
+  }
+} catch (e) {}
+function openRz(btn) {
+  rzFrom = btn;
+  rzState();
+  rz.hidden = false;
+  $('.rz-scroll', rz).scrollTop = 0;
+  if (ANIM) G.fromTo(rz, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .3, ease: 'power3.out', clearProps: 'opacity,transform' });
+  rzClose.focus({ preventScroll: true });
+}
+function closeRz() {
+  if (rz.hidden) return;
+  rz.hidden = true;
+  if (rzFrom) rzFrom.focus({ preventScroll: true });
+}
+$$('[data-resume]').forEach(function (b) { b.addEventListener('click', function () { openRz(b); }); });
+rzClose.addEventListener('click', closeRz);
+rzSave.addEventListener('click', function () {
+  if (direct) {
+    var a = document.createElement('a');
+    a.href = RES.file || 'yui-resume.pdf';
+    a.download = RES.saveAs || 'resume.pdf';
+    document.body.appendChild(a); a.click(); a.remove();
+    return;
+  }
+  if (!saver) return;
+  fetch(RES.file || 'yui-resume.pdf')
+    .then(function (r) { if (!r.ok) throw new Error('fetch'); return r.blob(); })
+    .then(function (blob) { return saver.save({ filename: RES.saveAs || 'resume.pdf', data: blob }); })
+    .then(function () { flashLabel(rzSave, t('rz.saved'), 2400); })
+    .catch(function (err) { if (err && err.code === 'declined') return; flashLabel(rzSave, t('rz.failed'), 4000); });
+});
+rz.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') { closeRz(); return; }
+  if (e.key !== 'Tab') return;
+  var f = $$('button', rz).filter(function (n) { return !n.hidden; });
+  var first = f[0], last = f[f.length - 1];
+  if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+});
+
+
+/* ---------- motion. The hero moves on its own (keywords band, badge, light parallax);
+   the motto section moves with the scroll; the rest are short entrances and reading aids.
+   All content is readable before any of this runs. ---------- */
+if (ANIM) (function () {
+  var FINE = mm('(hover: hover) and (pointer: fine)');
+  var once = function (trigger, start) { return { trigger: trigger, start: start || 'top 86%', once: true }; };
+  var rise = function (sel, st, vars) { G.from(sel, Object.assign({ y: 36, opacity: 0, duration: .55, ease: 'power3.out', scrollTrigger: st }, vars || {})); };
+  var vw = function (n) { return window.innerWidth * n / 100; }, vh = function (n) { return window.innerHeight * n / 100; };
+
+  /* 1. hero entrance, under 1.4s: the letters pop in one by one, the photo lands */
+  var played = false, introDone = false;
+  function intro() {
+    if (played) return;
+    played = true;
+    G.timeline({ defaults: { ease: 'back.out(1.8)' }, onComplete: function () { introDone = true; } })
+      .from('.hero-hello .tag', { y: -40, opacity: 0, rotation: -16, duration: .4 }, 0)
+      .from($$('.hero .name .ch'), { yPercent: 60, scale: 0, opacity: 0, rotation: function (i) { return i % 2 ? 14 : -14; }, duration: .45, stagger: .065 }, .05)
+      .from('.photo-a', { scale: 1.8, rotation: 14, opacity: 0, duration: .28, ease: 'power4.in' }, .42)
+      .to('.photo-a', { scale: .96, duration: .07, ease: 'power1.out' })
+      .to('.photo-a', { scale: 1, duration: .3, ease: 'elastic.out(1.1,.45)' })
+      .from('.hero-loc, .badge', { scale: 0, duration: .32, stagger: .08 }, .82)
+      .from('.hero-pos, .hero-value, .hero-cta', { y: 24, opacity: 0, duration: .42, stagger: .07, ease: 'power3.out' }, .5)
+      .from('.proofs li', { y: 20, opacity: 0, duration: .4, stagger: .08, ease: 'power3.out' }, .78)
+      .from('.marquee', { yPercent: 60, opacity: 0, duration: .5, ease: 'power3.out' }, .8);
+    root.classList.remove('intro-pending');
+  }
+  var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+  Promise.race([fontsReady, new Promise(function (r) { setTimeout(r, 1400); })]).then(function () { requestAnimationFrame(intro); });
+
+  /* hero: the photo and badge lean away from the pointer; each letter of the name springs when the pointer passes;
+     name and photo drift apart as the page scrolls */
+  if (FINE) {
+    var deep = $$('.hero [data-depth]').map(function (el) {
+      return { d: parseFloat(el.getAttribute('data-depth')) || 1, x: G.quickTo(el, 'x', { duration: .7, ease: 'power3.out' }), y: G.quickTo(el, 'y', { duration: .7, ease: 'power3.out' }) };
+    });
+    $('.hero').addEventListener('pointermove', function (e) {
+      var nx = e.clientX / window.innerWidth - .5, ny = e.clientY / window.innerHeight - .5;
+      deep.forEach(function (o) { o.x(-nx * 14 * o.d); o.y(-ny * 10 * o.d); });
+    });
+    $$('.hero .name').forEach(function (host) {
+      host.addEventListener('pointerover', function (e) {
+        var ch = e.target && e.target.closest ? e.target.closest('.ch') : null;
+        if (!introDone || !ch || !host.contains(ch)) return;
+        if (ch._hop) ch._hop.kill();
+        ch._hop = G.timeline()
+          .to(ch, { y: -.09 * (parseFloat(getComputedStyle(ch).fontSize) || 100), rotation: Math.random() < .5 ? -5 : 5, duration: .18, ease: 'power2.out' })
+          .to(ch, { y: 0, rotation: 0, duration: .75, ease: 'elastic.out(1,.42)' });
+      });
+    });
+  }
+  var heroST = { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .6 };
+  G.to('.name-zh', { xPercent: -4, ease: 'none', scrollTrigger: heroST });
+  G.to('.name-en', { xPercent: 7, ease: 'none', scrollTrigger: heroST });
+  G.to('.photo-a', { yPercent: -7, ease: 'none', scrollTrigger: heroST });
+
+  /* 2. motto beats, driven by the scroll (rebuilt after a language change) */
+  var beats = $$('.beat'), charTweens = [];
+  function beatOffset(i) {
+    var b = beats[0], m = parseFloat(getComputedStyle(b).marginBottom) || 0;
+    return Math.round(i * (b.offsetHeight + m));
+  }
+  /* a and b are in viewport heights, counted from the moment panel i reaches the top:
+     -1 = just entering from below, 0 = in place, about .4 = the end of its hold (the panel's bottom margin). */
+  function beatST(i, a, b) {
+    var at = function (v) {
+      return function () {
+        var n = Math.round(beatOffset(i) + v * window.innerHeight);
+        return 'top' + (n < 0 ? '-=' + (-n) : '+=' + n) + ' top';
+      };
+    };
+    return { trigger: '.beats', start: at(a), end: at(b), scrub: .5, invalidateOnRefresh: true };
+  }
+  function buildChars() {
+    charTweens.forEach(function (tw) { if (tw.scrollTrigger) tw.scrollTrigger.kill(); tw.kill(); });
+    charTweens = [];
+    beats.forEach(function (beat, i) {
+      charTweens.push(G.timeline({ scrollTrigger: beatST(i, -.88, -.06) })
+        .fromTo($$('.beat-word .ch', beat), { yPercent: 110, rotation: 9, opacity: 0 }, { yPercent: 0, rotation: 0, opacity: 1, ease: 'back.out(1.4)', stagger: .08, duration: .6 }, 0));
+    });
+    var q = $('.moment-q');
+    charTweens.push(G.fromTo($$('.ch', q), { opacity: .16 }, { opacity: 1, ease: 'none', stagger: .05, duration: .3, scrollTrigger: { trigger: q, start: 'top 82%', end: 'bottom 46%', scrub: .4 } }));
+  }
+  buildChars();
+  /* Every scrubbed piece below states both ends (fromTo inside a timeline): after a refresh nothing can be left
+     showing early or record the wrong resting place. */
+  /* step 1: the notes land wherever they land (the resting tilt matches the stylesheet) */
+  var TILT = [-9, 7, -13, 11, -5, 15];
+  G.timeline({ scrollTrigger: beatST(0, -.96, -.04) })
+    .fromTo($$('.s1 .nt'),
+      { x: function (k) { return vw(k % 2 ? 24 : -20); }, y: function () { return -vh(38); }, rotation: function (k) { return TILT[k % 6] + (k % 2 ? 55 : -55); }, opacity: 0 },
+      { x: 0, y: 0, rotation: function (k) { return TILT[k % 6]; }, opacity: 1, ease: 'power2.out', stagger: .07, duration: 1 }, 0);
+  /* ...and keep shifting a little for as long as the panel is in view (separate properties, so the two never fight) */
+  G.to($$('.s1 .nt'), {
+    xPercent: function (k) { return [10, -8, 12, -12, 6, -10][k % 6]; }, yPercent: function (k) { return [-34, 26, 20, -24, 32, -18][k % 6]; },
+    ease: 'none', scrollTrigger: beatST(0, 0, 1.1)
+  });
+  /* step 2: while the panel holds, the same notes travel down and line up under one goal.
+     Wide screens: they start in the free band above the phrase (worked out from the layout).
+     Phones: they start a set distance away, on the side of the grid that has room. */
+  var SLOT = [[.44, .45, -9], [.79, .08, 7], [.37, 1, 12], [.8, .92, -11], [.6, .68, 5], [.6, 0, -13]];
+  var PHONE = [[8, 30, -10], [-20, 41, 8], [26, 20, 13], [-8, 50, -7], [14, 36, 6], [-30, 24, -12]];
+  function s2from(k, el) {
+    var beat = beats[1], st = $('.stage', beat);
+    if (window.innerWidth <= 760) {
+      var dir = st.offsetTop > beat.offsetHeight * .45 ? -1 : 1;
+      return { x: vw(PHONE[k % 6][0]), y: dir * vh(PHONE[k % 6][1]), r: PHONE[k % 6][2] };
+    }
+    var word = $('.beat-word', beat), meta = $('.beat-meta', beat), s = SLOT[k % 6];
+    var top = meta.offsetTop + meta.offsetHeight + 14;
+    var bottom = Math.max(top, word.offsetTop - el.offsetHeight + word.offsetHeight * .06);
+    return { x: beat.offsetWidth * s[0] - (st.offsetLeft + el.offsetLeft), y: top + (bottom - top) * s[1] - (st.offsetTop + el.offsetTop), r: s[2] };
+  }
+  G.timeline({ scrollTrigger: beatST(1, -.3, .34) })
+    .fromTo($$('.s2 .nt'),
+      { x: function (k, el) { return s2from(k, el).x; }, y: function (k, el) { return s2from(k, el).y; }, rotation: function (k, el) { return s2from(k, el).r; } },
+      { x: 0, y: 0, rotation: 0, ease: 'power2.inOut', stagger: .05, duration: 1 }, 0)
+    .fromTo('.s2 .goal', { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, ease: 'back.out(2)', duration: .25 }, 1.02);
+  /* step 3: while the panel holds, the three deliverables come out one by one */
+  G.timeline({ scrollTrigger: beatST(2, -.16, .3) })
+    .fromTo($$('.s3 .oc'),
+      { y: function (k) { return (1 - k) * 70; }, x: function (k) { return k * -vw(3); }, scale: .5, rotation: function (k) { return [-10, 6, -4][k % 3]; }, opacity: 0 },
+      { y: 0, x: 0, scale: 1, rotation: 0, opacity: 1, ease: 'back.out(1.5)', stagger: .22, duration: .7 }, 0);
+  beats.forEach(function (beat, i) {
+    G.fromTo($('.beat-cap', beat), { opacity: 0, y: 30 }, { opacity: 1, y: 0, ease: 'none', scrollTrigger: beatST(i, -.45, -.02) });
+  });
+  G.from('.work-self', { y: 40, opacity: 0, duration: .7, ease: 'power3.out', scrollTrigger: once('.work-self') });
+  G.from('.kw', { y: -70, opacity: 0, scale: .6, rotation: '+=24', duration: .55, ease: 'back.out(2)', stagger: .09, scrollTrigger: once('.kws', 'top 82%') });
+  $$('.way').forEach(function (el) { G.from(el, { y: 70, opacity: 0, rotation: '-=4', duration: .6, ease: 'back.out(1.5)', scrollTrigger: once(el, 'top 90%') }); });
+
+  /* 3. AI work */
+  G.from('.ai-title', { yPercent: 25, opacity: 0, duration: .7, ease: 'power4.out', scrollTrigger: once('.ai-title') });
+  rise('.ai-lead', once('.ai-head'));
+  G.from('.cred', { y: 60, opacity: 0, duration: .6, ease: 'back.out(1.4)', stagger: .12, scrollTrigger: once('.creds', 'top 84%') });
+  G.from('.cred-burst', { scale: 0, rotation: '-=70', duration: .6, ease: 'back.out(2)', scrollTrigger: once('.cred-cert', 'top 70%') });
+  rise('.case', once('.case', 'top 88%'), { y: 60, duration: .6 });
+  G.from('.strip li', { opacity: 0, x: -18, duration: .35, ease: 'power3.out', stagger: .16, scrollTrigger: once('.case', 'top 66%') });   // start → my part → result, in order
+  G.from('.mini', { y: 40, opacity: 0, duration: .5, ease: 'power3.out', stagger: .12, scrollTrigger: once('.minis', 'top 88%') });
+
+  /* 4. CMP */
+  G.from('.cmp-title', { xPercent: -10, opacity: 0, duration: .8, ease: 'power4.out', scrollTrigger: once('.cmp-title', 'top 88%') });
+  G.to('.curtain', { xPercent: 103, duration: 1.1, ease: 'power4.inOut', scrollTrigger: once('.cmp-b', 'top 74%') });
+  G.from('.cmp-b img', { scale: 1.2, duration: 1.4, ease: 'power3.out', scrollTrigger: once('.cmp-b', 'top 74%') });
+  G.from('.cmp-facts > *', { y: 30, opacity: 0, duration: .55, ease: 'power3.out', stagger: .1, scrollTrigger: once('.cmp-facts', 'top 80%') });
+  rise('.did-head > *', once('.did-head'), { stagger: .1 });
+  $$('.did').forEach(function (el) {
+    G.from(el, { x: -50, opacity: 0, duration: .6, ease: 'power3.out', scrollTrigger: once(el) });
+    G.from($('.did-n', el), { scale: 0, rotation: -30, duration: .6, ease: 'back.out(2.2)', scrollTrigger: once(el) });
+  });
+  var cb = $('.cband-view');
+  G.timeline({ scrollTrigger: { trigger: cb, start: 'top bottom', end: 'bottom top', scrub: .5 } })
+    .fromTo($$('img', cb), { xPercent: 0 }, { xPercent: -10.7, ease: 'none', duration: 1 }, 0)
+    .to('.cband-print', { opacity: 0, ease: 'none', duration: .32 }, .3);
+  G.from('.moment-mark', { scale: 0, duration: .5, ease: 'back.out(2)', stagger: .15, scrollTrigger: once('.moment', 'top 70%') });
+  G.from('.cmp-d .frame', { scale: .5, rotation: -8, ease: 'none', scrollTrigger: { trigger: '.cmp-d', start: 'top 98%', end: 'top 40%', scrub: .6 } });
+  G.from('.cmp-wrap > *', { y: 30, opacity: 0, duration: .5, ease: 'power3.out', stagger: .1, scrollTrigger: once('.cmp-wrap', 'top 84%') });
+
+  /* 5. numbers count up from zero */
+  $$('.nrow').forEach(function (row) { G.from($$('.nrow-h, .n', row), { y: 30, opacity: 0, duration: .5, ease: 'power3.out', stagger: .07, scrollTrigger: once(row, 'top 86%') }); });
+  $$('.cnt').forEach(function (el) {
+    var end = parseFloat(el.getAttribute('data-count')) || 0, o = { v: 0 };
+    el.style.display = 'inline-block';
+    el.style.minWidth = el.offsetWidth + 'px';
+    el.textContent = '0';
+    G.to(o, { v: end, duration: 1.5, ease: 'power3.out', scrollTrigger: once(el, 'top 92%'),
+      onUpdate: function () { el.textContent = Math.round(o.v); },
+      onComplete: function () { el.textContent = end; el.style.minWidth = ''; } });
+  });
+
+  /* 6. timeline: the line draws itself with the scroll, nodes pop when it reaches them */
+  var LINE = '68%';
+  rise('.tl-thread', once('.tl-thread'));
+  $$('.tl-item').forEach(function (item) {
+    var H = function (f) { return Math.round(item.offsetHeight * f); };
+    $$('.tl-seg', item).forEach(function (seg) {
+      var s = 'top ' + LINE, e = 'bottom ' + LINE;
+      if (seg.classList.contains('seg-stub')) e = 'top+=26 ' + LINE;
+      else if (seg.classList.contains('lane-b')) { s = 'top+=26 ' + LINE; e = function () { return 'top+=' + H(.8) + ' ' + LINE; }; }
+      else if (seg.classList.contains('lane-a')) s = function () { return 'top+=' + H(.3) + ' ' + LINE; };
+      G.from(seg, { scaleY: 0, ease: 'none', scrollTrigger: { trigger: item, start: s, end: e, scrub: .3, invalidateOnRefresh: true } });
+    });
+    $$('.tl-jog, .tl-cap', item).forEach(function (j) {
+      var s = j.classList.contains('jog-top') ? 'top+=26 ' + LINE : function () { return 'top+=' + H(j.classList.contains('tl-cap') ? .3 : .8) + ' ' + LINE; };
+      G.from(j, { scaleX: 0, duration: .3, ease: 'power2.out', scrollTrigger: { trigger: item, start: s, toggleActions: 'play none none reverse', invalidateOnRefresh: true } });
+    });
+    $$('.tl-node', item).forEach(function (node) {
+      G.from(node, { scale: 0, duration: .5, ease: 'back.out(3.5)', scrollTrigger: { trigger: node.parentNode, start: 'top+=18 ' + LINE, toggleActions: 'play none none reverse' } });
+    });
+    $$('.tl-card', item).forEach(function (card) {
+      G.from(card, { x: 60, opacity: 0, duration: .55, ease: 'power3.out', scrollTrigger: once(card, 'top 88%') });
+    });
+  });
+  G.from('.tl-title', { yPercent: 25, opacity: 0, duration: .7, ease: 'power4.out', scrollTrigger: once('.tl-title') });
+  G.from('.tl-stickers > *', { scale: 0, rotation: '-=60', duration: .6, ease: 'back.out(2)', stagger: .12, scrollTrigger: once('.tl-stickers', 'top 90%') });
+
+  /* 7. strengths and tools */
+  G.from('.sk-title', { yPercent: 25, opacity: 0, duration: .7, ease: 'power4.out', scrollTrigger: once('.sk-title') });
+  /* each row lights up as it passes reading height and hands over to the next; the last one stays lit.
+     The rows only fade in (no movement), so their measured positions stay true. */
+  var sks = $$('.sk');
+  root.classList.add('sk-scroll');
+  sks.forEach(function (el, i) {
+    var last = i === sks.length - 1;
+    G.from(el, { opacity: 0, duration: .5, ease: 'power2.out', scrollTrigger: once(el, 'top 90%') });
+    var lit = function (on) { el.classList.toggle('is-on', on); };
+    /* enter/leave callbacks (not onToggle), so a jump past the whole list still leaves the last row lit */
+    ST.create({ trigger: el, start: 'top 62%', end: 'bottom 62%',
+      onEnter: function () { lit(true); }, onEnterBack: function () { lit(true); },
+      onLeave: function () { lit(last); }, onLeaveBack: function () { lit(false); } });
+  });
+  G.from('.tools-title', { yPercent: 25, opacity: 0, duration: .7, ease: 'power4.out', scrollTrigger: once('.tools-title') });
+  $$('.tgroup').forEach(function (g) {
+    G.from($$('.stk', g), { scale: 0, opacity: 0, duration: .4, ease: 'back.out(2)', stagger: .05, scrollTrigger: once(g, 'top 88%') });
+  });
+
+  /* 8. contact */
+  G.from('.ct-big', { yPercent: 30, opacity: 0, duration: .7, ease: 'power4.out', scrollTrigger: once('.ct-big', 'top 88%') });
+  G.from('.ct-sub', { scale: 0, rotation: -30, duration: .6, ease: 'back.out(2)', scrollTrigger: once('.ct-big', 'top 62%') });
+  G.from('.ct-left > *, .ct-right > *', { y: 30, opacity: 0, duration: .5, ease: 'power3.out', stagger: .08, scrollTrigger: once('.ct-row', 'top 90%') });
+
+  hooks.push(function () { buildChars(); ST.refresh(); });
+  window.addEventListener('load', function () { ST.refresh(); });
+  fontsReady.then(function () { ST.refresh(); });
+})();
+
+})();
+
+</script>
+
+</body>
+</html>
